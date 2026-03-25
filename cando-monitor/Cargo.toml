@@ -1,0 +1,33 @@
+[package]
+name = "cando-monitor"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+repository.workspace = true
+description = "CAN monitoring utility for cando-rs"
+
+[[bin]]
+name = "cando-monitor"
+path = "src/main.rs"
+
+[dependencies]
+cando-messages.workspace = true
+hex.workspace = true
+clap.workspace = true
+anyhow.workspace = true
+socketcan.workspace = true
+tokio.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+chrono.workspace = true
+regex.workspace = true
+ctrlc.workspace = true
+tungstenite.workspace = true
+tokio-tungstenite.workspace = true
+futures-util.workspace = true
+clap_mangen = { workspace = true, optional = true }
+[features]
+manpages = ["clap_mangen"]
+
+[dev-dependencies]

@@ -1,0 +1,41 @@
+[package]
+name = "cando-simulator-common"
+version.workspace = true
+edition = "2021"
+authors = ["John Suykerbuyk <john@syketech.com>"]
+description = "Common functionality for CAN device simulators"
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/suykerbuyk/cando-rs"
+
+[dependencies]
+# Error handling
+anyhow.workspace = true
+thiserror.workspace = true
+
+# Async runtime
+tokio.workspace = true
+
+# WebSocket
+tokio-tungstenite.workspace = true
+futures-util.workspace = true
+
+# Serialization
+serde.workspace = true
+serde_json.workspace = true
+
+# CAN
+socketcan.workspace = true
+
+# CLI
+clap.workspace = true
+
+# Logging
+tracing.workspace = true
+tracing-subscriber.workspace = true
+
+# Internal workspace crates
+cando-config = { path = "../cando-config" }
+
+[dev-dependencies]
+tokio-test.workspace = true
+tempfile.workspace = true

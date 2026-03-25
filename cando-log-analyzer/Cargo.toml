@@ -1,0 +1,29 @@
+[package]
+name = "cando-log-analyzer"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+repository.workspace = true
+description = "CAN log analyzer utility for cando-rs"
+
+[[bin]]
+name = "cando-log-analyzer"
+path = "src/main.rs"
+
+[dependencies]
+cando-messages.workspace = true
+clap.workspace = true
+anyhow.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+regex.workspace = true
+chrono.workspace = true
+tokio.workspace = true
+futures-util.workspace = true
+tungstenite.workspace = true
+tokio-tungstenite.workspace = true
+can-dbc.workspace = true
+clap_mangen = { workspace = true, optional = true }
+[features]
+manpages = ["clap_mangen"]

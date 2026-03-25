@@ -1,0 +1,54 @@
+.ie \n(.g .ds Aq \(aq
+.el .ds Aq '
+.TH cando-send 1  "cando-send 0.1.0" 
+.SH NAME
+cando\-send \- Send CAN frames to a CAN interface
+.SH SYNOPSIS
+\fBcando\-send\fR [\fB\-f\fR|\fB\-\-file\fR] [\fB\-r\fR|\fB\-\-rate\fR] [\fB\-i\fR|\fB\-\-interval\fR] [\fB\-v\fR|\fB\-\-verbose\fR] [\fB\-h\fR|\fB\-\-help\fR] [\fB\-V\fR|\fB\-\-version\fR] [\fIINTERFACE\fR] [\fIFRAME\fR] 
+.SH DESCRIPTION
+Send CAN frames to a CAN interface
+.SH OPTIONS
+.TP
+\fB\-f\fR, \fB\-\-file\fR \fI<PATH>\fR
+Log file to replay (file replay mode)
+
+Supported formats: \- candump ASCII: (timestamp) interface CANID#DATA \- candump JSON: structured JSON objects
+
+Format is auto\-detected from file content.
+.TP
+\fB\-r\fR, \fB\-\-rate\fR \fI<RATE>\fR
+Replay rate in messages per second (file replay mode)
+
+Examples: \-\-rate 100    (100 messages/second, 10ms between frames) \-\-rate 1000   (1000 messages/second, 1ms between frames) \-\-rate 10     (10 messages/second, 100ms between frames)
+
+If neither \-\-rate nor \-\-interval is specified, frames are sent as fast as possible (no delay).
+.TP
+\fB\-i\fR, \fB\-\-interval\fR \fI<MS>\fR
+Fixed interval between frames in milliseconds (file replay mode)
+
+This overrides \-\-rate if both are specified.
+
+Examples: \-\-interval 10   (10ms between frames = 100 msgs/sec) \-\-interval 100  (100ms between frames = 10 msgs/sec) \-\-interval 1    (1ms between frames = 1000 msgs/sec)
+.TP
+\fB\-v\fR, \fB\-\-verbose\fR
+Verbose output (progress reporting and diagnostics)
+.TP
+\fB\-h\fR, \fB\-\-help\fR
+Print help (see a summary with \*(Aq\-h\*(Aq)
+.TP
+\fB\-V\fR, \fB\-\-version\fR
+Print version
+.TP
+[\fIINTERFACE\fR]
+CAN interface name (e.g., vcan0, can0)
+.TP
+[\fIFRAME\fR]
+CAN frame specification (single frame mode): <can_id>#{data}
+
+Formats: \- Standard ID (3 hex): 123#DEADBEEF \- Extended ID (8 hex): 00000123#11223344 \- RTR frame: 123#R or 123#R5 \- CAN FD: 123##311223344 \- Dot\-separated data: 5A1#11.22.33.44 \- Empty data: 5AA#
+
+Not used when \-\-file is specified.
+.SH VERSION
+v0.1.0
+.SH AUTHORS
+John Suykerbuyk <john@syketech.com>

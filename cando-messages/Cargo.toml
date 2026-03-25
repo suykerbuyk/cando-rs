@@ -1,0 +1,36 @@
+[package]
+name = "cando-messages"
+version.workspace = true
+edition = "2021"
+authors = ["John Suykerbuyk <john@syketech.com>"]
+description = "Generated message types for CAN bus protocols (J1939)"
+license = "MIT OR Apache-2.0"
+
+[lib]
+name = "cando_messages"
+path = "src/lib.rs"
+
+[dependencies]
+thiserror.workspace = true
+bitvec.workspace = true
+serde = { workspace = true, features = ["derive"], optional = true }
+
+[build-dependencies]
+# Dependencies for build.rs, if needed (e.g., for generation)
+anyhow.workspace = true
+can-dbc.workspace = true
+quote.workspace = true
+syn = { workspace = true, features = ["full"] }
+proc-macro2.workspace = true
+
+[dev-dependencies]
+criterion.workspace = true
+proptest.workspace = true
+
+[[bench]]
+name = "encoder_bench"
+harness = false
+
+[features]
+serde = ["dep:serde"]
+validation = []

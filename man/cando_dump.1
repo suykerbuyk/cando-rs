@@ -1,0 +1,59 @@
+.ie \n(.g .ds Aq \(aq
+.el .ds Aq '
+.TH cando-dump 1  "cando-dump 0.1.0" 
+.SH NAME
+cando\-dump \- Dump CAN bus frames to stdout or log file
+.SH SYNOPSIS
+\fBcando\-dump\fR [\fB\-t \fR] [\fB\-l \fR] [\fB\-f \fR] [\fB\-n \fR] [\fB\-c \fR]... [\fB\-a \fR] [\fB\-s \fR] [\fB\-T \fR] [\fB\-\-format\fR] [\fB\-\-stats\fR] [\fB\-h\fR|\fB\-\-help\fR] [\fB\-V\fR|\fB\-\-version\fR] <\fIINTERFACE\fR> 
+.SH DESCRIPTION
+A Rust implementation of the candump utility for monitoring CAN bus traffic.
+Provides 100% command\-line compatibility with can\-utils candump while
+integrating with the cando\-rs CAN toolkit.
+.SH OPTIONS
+.TP
+\fB\-t\fR \fI<TYPE>\fR [default: a]
+Timestamp mode: (a)bsolute, (d)elta, (z)ero, (A)bsolute with date
+.TP
+\fB\-l\fR
+Log CAN frames to file (default: cando\-dump\-YYYY\-MM\-DD_HHMMSS.log)
+.TP
+\fB\-f\fR \fI<FILE>\fR
+Specify log filename (implies \-l)
+.TP
+\fB\-n\fR \fI<COUNT>\fR
+Terminate after receiving N frames
+.TP
+\fB\-c\fR
+Enable color output (can be specified multiple times for more colors)
+.TP
+\fB\-a\fR
+Enable ASCII output (show printable characters)
+.TP
+\fB\-s\fR \fI<LEVEL>\fR [default: 0]
+Silent mode: 0=off, 1=animation, 2=silent
+.TP
+\fB\-T\fR \fI<MSECS>\fR
+Terminate after timeout (milliseconds with no frames)
+.TP
+\fB\-\-format\fR \fI<FORMAT>\fR [default: candump]
+Output format: candump (default), json, decoded
+.TP
+\fB\-\-stats\fR
+Display statistics on exit
+.TP
+\fB\-h\fR, \fB\-\-help\fR
+Print help (see a summary with \*(Aq\-h\*(Aq)
+.TP
+\fB\-V\fR, \fB\-\-version\fR
+Print version
+.TP
+<\fIINTERFACE\fR>
+CAN interfaces to monitor with optional filters
+
+Format: interface[,filter1][,filter2][,...][,j|J]
+
+Filter syntax: id:mask   \- Include: (received_id & mask) == (id & mask) id~mask   \- Exclude: (received_id & mask) != (id & mask) #error    \- Error frames only j or J    \- AND logic for multiple filters (default: OR)
+
+Examples: can0,123:7FF         \- Only ID 0x123 on can0 can0,100~700:7FF     \- Exclude 0x100\-0x1FF on can0 vcan0,123:7FF,j      \- Multiple filters with AND logic
+.SH VERSION
+v0.1.0

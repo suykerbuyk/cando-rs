@@ -1,0 +1,78 @@
+.ie \n(.g .ds Aq \(aq
+.el .ds Aq '
+.TH cando-util 1  "cando-util 0.1.0" 
+.SH NAME
+cando\-util \- CAN Message Encoder \- Encode and transmit J1939 CAN messages from field assignments
+.SH SYNOPSIS
+\fBcando\-util\fR [\fB\-\-config\fR] [\fB\-\-environment\fR] [\fB\-\-device\fR] [\fB\-\-device\-id\fR] [\fB\-\-message\fR] [\fB\-\-fields\fR] [\fB\-\-send\-interface\fR] [\fB\-f\fR|\fB\-\-format\fR] [\fB\-\-template\fR] [\fB\-h\fR|\fB\-\-help\fR] [\fB\-V\fR|\fB\-\-version\fR] [\fIsubcommands\fR]
+.SH DESCRIPTION
+CAN Message Encoder \- Encode and transmit J1939 CAN messages from field assignments
+.SH OPTIONS
+.TP
+\fB\-\-config\fR \fI<CONFIG>\fR
+Path to cando.yaml configuration file
+.TP
+\fB\-\-environment\fR \fI<ENVIRONMENT>\fR
+Environment to validate (validates only this environment instead of entire config)
+
+When specified, only the devices and configuration relevant to this environment are validated. This avoids validation warnings for unused environments. If not specified, the entire configuration file is validated.
+.TP
+\fB\-\-device\fR \fI<DEVICE>\fR
+Device name from cando.yaml
+.TP
+\fB\-\-device\-id\fR \fI<DEVICE_ID>\fR
+Device ID to embed (hex like 0x8A or decimal) Device identifier to embed in CAN messages
+
+This ID will be embedded as the source address in the CAN message identifier, typically in the lower 8 bits for J1939 compatibility. Valid range is 0\-255 (0x00\-0xFF).
+.TP
+\fB\-\-message\fR \fI<MESSAGE>\fR
+Message name (e.g., EEC1) Name of the CAN message to process
+
+Specifies which message definition to use. The name must match exactly with a generated message type (case\-sensitive). Examples: \- J1939: DM1_DiagnosticMessage, EEC1_ElectronicEngineController1
+.TP
+\fB\-\-fields\fR \fI<FIELDS>\fR [default: ]
+Optional fields as key=value pairs (e.g., "speed=50,status=1") Signal field assignments for the message
+
+Specify signal values using comma\-separated key=value pairs. Field names must match the generated signal names exactly. Values can be integers or floating\-point numbers.
+.TP
+\fB\-\-send\-interface\fR \fI<SEND_INTERFACE>\fR
+Optional: Send the message over this CAN interface (e.g., vcan0) Optional CAN interface for message transmission
+
+If specified, the encoded message will be sent over the given CAN interface. The interface must be available and properly configured (e.g., \*(Aqcan0\*(Aq, \*(Aqvcan0\*(Aq). Use \*(Aqip link show type can\*(Aq to list available CAN interfaces.
+.TP
+\fB\-f\fR, \fB\-\-format\fR \fI<FORMAT>\fR [default: text]
+Output format: text, json, or csv Format for displaying the encoded message and signal values
+
+\- text: Human\-readable format with signal names, values, and units \- json: Structured JSON format suitable for API integration \- csv: Comma\-separated values for spreadsheet analysis
+.TP
+\fB\-\-template\fR
+Generate a template bash script with all message fields and comments
+
+Creates a ready\-to\-edit bash script showing all fields with their ranges, units, and default values. This helps compose messages without memorizing field names or looking up valid ranges.
+.TP
+\fB\-h\fR, \fB\-\-help\fR
+Print help (see a summary with \*(Aq\-h\*(Aq)
+.TP
+\fB\-V\fR, \fB\-\-version\fR
+Print version
+.SH SUBCOMMANDS
+.TP
+cando\-util\-diagnostics(1)
+J1939\-73 Diagnostic commands (DM01, DM02, DM03, etc.)
+.TP
+cando\-util\-list\-devices(1)
+List all devices from configuration
+.TP
+cando\-util\-builder(1)
+Interactive message builder (TUI) or quick lookup mode
+.TP
+cando\-util\-show\-device(1)
+Show detailed information about a specific device
+.TP
+cando\-util\-list\-environments(1)
+List all environments from configuration
+.TP
+cando\-util\-help(1)
+Print this message or the help of the given subcommand(s)
+.SH VERSION
+v0.1.0

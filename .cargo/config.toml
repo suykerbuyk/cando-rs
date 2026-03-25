@@ -1,0 +1,30 @@
+# Cargo Cross-Compilation Configuration
+#
+# This file configures cross-compilation linkers for building Cando-RS
+# binaries for multiple target platforms.
+#
+# Targets Supported:
+# - x86_64-unknown-linux-gnu   (native, no configuration needed)
+# - aarch64-unknown-linux-gnu  (Raspberry Pi 5, ARM64, dynamic linking)
+# - x86_64-unknown-linux-musl  (static binaries via Zig, no config needed)
+# - aarch64-unknown-linux-musl (static binaries via Zig, no config needed)
+#
+# Prerequisites:
+# - Rust targets: rustup target add aarch64-unknown-linux-gnu
+# - ARM cross-compiler: sudo apt install gcc-aarch64-linux-gnu
+# - For musl static builds: Zig toolchain (see doc/build-system.md)
+#
+# Usage:
+#   cargo build --target aarch64-unknown-linux-gnu --release
+#   cargo zigbuild --target x86_64-unknown-linux-musl --release
+#
+# Or via Makefile:
+#   make build-aarch64-release  (uses GCC for dynamic linking)
+#   make build-musl-release     (uses Zig for static linking)
+
+# ARM64 (aarch64) - Raspberry Pi 5 (dynamic linking with glibc)
+[target.aarch64-unknown-linux-gnu]
+linker = "aarch64-linux-gnu-gcc"
+
+# Note: musl targets (x86_64 and aarch64) use Zig toolchain via cargo-zigbuild
+# No linker configuration needed - Zig handles static linking internally

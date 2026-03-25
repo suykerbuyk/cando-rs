@@ -1,0 +1,24 @@
+# cargo-tarpaulin configuration for cando-rs workspace coverage
+#
+# Run: cargo tarpaulin  (or: make coverage)
+# Output: target/coverage/tarpaulin-report.html
+
+[default]
+# Workspace-wide coverage
+workspace = true
+
+# Output formats
+out = ["Html"]
+output-dir = "target/coverage"
+
+# Exclude generated code (505K lines) and code generator
+exclude = [
+    "cando-codegen",
+]
+exclude-files = [
+    "cando-messages/src/generated/*",
+]
+
+# Test configuration
+test-threads = 1
+timeout = "300s"

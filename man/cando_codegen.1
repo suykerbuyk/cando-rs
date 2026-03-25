@@ -1,0 +1,60 @@
+.ie \n(.g .ds Aq \(aq
+.el .ds Aq '
+.TH cando-codegen 1  "cando-codegen 0.1.0" 
+.SH NAME
+cando\-codegen \- Generate Rust code from DBC files for CAN\-Do
+.SH SYNOPSIS
+\fBcando\-codegen\fR [\fB\-h\fR|\fB\-\-help\fR] [\fB\-V\fR|\fB\-\-version\fR] <\fIsubcommands\fR>
+.SH DESCRIPTION
+A standalone code generator that transforms CAN DBC files into type\-safe Rust code.
+.PP
+OVERVIEW:
+This tool generates Rust protocol implementations from proprietary DBC (Database CAN) files.
+It uses SHA\-256 checksums to intelligently regenerate only when source files change,
+following the "C compiler model" \- only recompile what\*(Aqs needed.
+.PP
+LICENSING MODEL:
+\- DBC files: Proprietary (not redistributable)
+\- Generated Rust: Derivative work (open\-source, MIT/Apache\-2.0)
+\- This enables open\-source distribution without requiring proprietary files
+.PP
+FOR OPEN\-SOURCE USERS:
+You don\*(Aqt need DBC files or this tool! Generated code is already included in the repository.
+Just run \*(Aqcargo build\*(Aq normally.
+.PP
+FOR MAINTAINERS:
+Use this tool when you have licensed DBC files and need to regenerate protocol implementations.
+Changes are tracked via checksums stored in dbc/.checksums.json
+.PP
+See dbc/README.md for complete documentation on the code generation workflow.
+.SH OPTIONS
+.TP
+\fB\-h\fR, \fB\-\-help\fR
+Print help (see a summary with \*(Aq\-h\*(Aq)
+.TP
+\fB\-V\fR, \fB\-\-version\fR
+Print version
+.SH SUBCOMMANDS
+.TP
+cando\-codegen\-generate(1)
+Generate code for a specific protocol
+.TP
+cando\-codegen\-generate\-all(1)
+Generate all protocols (only if changed)
+.TP
+cando\-codegen\-validate(1)
+Validate that generated code matches DBC files
+.TP
+cando\-codegen\-status(1)
+Show status of all protocols
+.TP
+cando\-codegen\-list(1)
+List all available protocols
+.TP
+cando\-codegen\-detect\-changes(1)
+Detect algorithm evolution (DBC unchanged, output changed)
+.TP
+cando\-codegen\-help(1)
+Print this message or the help of the given subcommand(s)
+.SH VERSION
+v0.1.0

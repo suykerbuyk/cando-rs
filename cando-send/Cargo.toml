@@ -1,0 +1,28 @@
+[package]
+name = "cando-send"
+edition.workspace = true
+version.workspace = true
+authors.workspace = true
+license.workspace = true
+repository.workspace = true
+
+[[bin]]
+name = "cando-send"
+path = "src/main.rs"
+
+[dependencies]
+socketcan.workspace = true
+clap.workspace = true
+clap_mangen = { workspace = true, optional = true }
+anyhow.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+
+[dev-dependencies]
+tempfile.workspace = true
+
+[features]
+manpages = ["clap_mangen"]
+
+[lints]
+workspace = true

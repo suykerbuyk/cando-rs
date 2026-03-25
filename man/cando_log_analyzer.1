@@ -1,0 +1,72 @@
+.ie \n(.g .ds Aq \(aq
+.el .ds Aq '
+.TH cando-log-analyzer 1  "cando-log-analyzer 0.1.0" 
+.SH NAME
+cando\-log\-analyzer \- CAN Log Analyzer \- Parse candump logs with comprehensive DBC decoding (J1939)
+.SH SYNOPSIS
+\fBcando\-log\-analyzer\fR [\fB\-d\fR|\fB\-\-decoded\-only\fR] [\fB\-f\fR|\fB\-\-device\-filter\fR] [\fB\-m\fR|\fB\-\-message\-filter\fR] [\fB\-v\fR|\fB\-\-verbose\fR] [\fB\-s\fR|\fB\-\-statistics\fR] [\fB\-\-export\-json\fR] [\fB\-\-export\-csv\fR] [\fB\-o\fR|\fB\-\-output\fR] [\fB\-\-csv\fR] [\fB\-\-json\fR] [\fB\-\-text\fR] [\fB\-t\fR|\fB\-\-timing\-analysis\fR] [\fB\-l\fR|\fB\-\-limit\fR] [\fB\-h\fR|\fB\-\-help\fR] [\fB\-V\fR|\fB\-\-version\fR] <\fILOG_FILE\fR> 
+.SH DESCRIPTION
+CAN Log Analyzer \- Parse candump logs with comprehensive DBC decoding (J1939)
+.SH OPTIONS
+.TP
+\fB\-d\fR, \fB\-\-decoded\-only\fR
+Show only decoded messages (hide unknown)
+.TP
+\fB\-f\fR, \fB\-\-device\-filter\fR \fI<DEVICE_FILTER>\fR
+Filter by specific device IDs (comma\-separated hex values)
+.TP
+\fB\-m\fR, \fB\-\-message\-filter\fR \fI<MESSAGE_FILTER>\fR
+Filter by message name patterns (comma\-separated)
+.TP
+\fB\-v\fR, \fB\-\-verbose\fR
+Show detailed signal analysis
+.TP
+\fB\-s\fR, \fB\-\-statistics\fR
+Show statistics summary
+.TP
+\fB\-\-export\-json\fR \fI<EXPORT_JSON>\fR
+Export decoded data to JSON file
+.TP
+\fB\-\-export\-csv\fR \fI<EXPORT_CSV>\fR
+Export decoded data to CSV file
+.TP
+\fB\-o\fR, \fB\-\-output\fR \fI<OUTPUT>\fR [default: text]
+Output format
+.br
+
+.br
+\fIPossible values:\fR
+.RS 14
+.IP \(bu 2
+text: Human\-readable text format (default)
+.IP \(bu 2
+csv: Comma\-separated values format
+.IP \(bu 2
+json: JSON format
+.RE
+.TP
+\fB\-\-csv\fR
+Output in CSV format (same as \-\-output=csv)
+.TP
+\fB\-\-json\fR
+Output in JSON format (same as \-\-output=json)
+.TP
+\fB\-\-text\fR
+Output in text format (same as \-\-output=text)
+.TP
+\fB\-t\fR, \fB\-\-timing\-analysis\fR
+Show message timing analysis
+.TP
+\fB\-l\fR, \fB\-\-limit\fR \fI<LIMIT>\fR
+Limit number of messages to process (for large files)
+.TP
+\fB\-h\fR, \fB\-\-help\fR
+Print help (see a summary with \*(Aq\-h\*(Aq)
+.TP
+\fB\-V\fR, \fB\-\-version\fR
+Print version
+.TP
+<\fILOG_FILE\fR>
+Path to candump log file
+.SH VERSION
+v0.1.0

@@ -1,0 +1,82 @@
+[package]
+name = "cando-meta"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+repository.workspace = true
+description = "Meta-package for cando-rs Debian distribution"
+
+# This is a meta-package with no actual code - it exists solely to
+# create a single Debian package containing all cando-rs binaries
+[lib]
+path = "src/lib.rs"
+
+# No dependencies needed - this package just bundles existing binaries
+[dependencies]
+
+# Debian package metadata for cargo-deb
+# Run: cargo deb -p cando-meta --target=x86_64-unknown-linux-musl
+[package.metadata.deb]
+name = "cando-rs"
+maintainer = "John Suykerbuyk <john@syketech.com>"
+copyright = "2025, John Suykerbuyk <john@syketech.com>"
+extended-description = """\
+cando-rs provides a comprehensive suite of tools for CAN bus
+development, monitoring, and simulation with compile-time type safety
+and zero-cost abstractions.
+
+Features:
+ - Real-time CAN monitoring and frame capture (cando-dump)
+ - CAN frame sending with file replay support (cando-send)
+ - Type-safe message encoding/decoding (cando-util)
+ - Protocol inspection and analysis tools
+ - J1939 device simulator (cando-j1939-sim)
+ - DBC to Rust code generator (cando-codegen)
+ - Complete log analysis and signal inspection utilities
+ .
+All binaries are statically linked using musl and have zero system
+dependencies, making them portable across all Linux distributions."""
+
+# Debian control fields
+section = "utils"
+priority = "optional"
+depends = "$auto, libcap2-bin"
+
+# Maintainer scripts for setting capabilities on installation
+maintainer-scripts = "debian/"
+
+# Assets to include in the package
+assets = [
+    # CLI Tools
+    ["target/release/cando-util", "usr/bin/", "755"],
+    ["target/release/cando-dump-messages", "usr/bin/", "755"],
+    ["target/release/cando-monitor", "usr/bin/", "755"],
+    ["target/release/cando-dump", "usr/bin/", "755"],
+    ["target/release/cando-send", "usr/bin/", "755"],
+    ["target/release/cando-log-analyzer", "usr/bin/", "755"],
+    ["target/release/cando-cfg", "usr/bin/", "755"],
+    ["target/release/cando-ws-query", "usr/bin/", "755"],
+
+    # Device Simulator
+    ["target/release/cando-j1939-sim", "usr/bin/", "755"],
+
+    # Code Generation Tool
+    ["target/release/cando-codegen", "usr/bin/", "755"],
+
+    # Man Pages
+    ["../man/*.1", "usr/share/man/man1/", "644"],
+
+    # Shell Completions
+    ["../target/completions/bash/*", "usr/share/bash-completion/completions/", "644"],
+    ["../target/completions/zsh/*", "usr/share/zsh/site-functions/", "644"],
+    ["../target/completions/fish/*", "usr/share/fish/vendor_completions.d/", "644"],
+
+    # Documentation
+    ["../README.md", "usr/share/doc/cando-rs/README", "644"],
+]
+
+separate-debug-symbols = false
+preserve-symlinks = false
+
+[package.metadata.deb.variants.arm64]

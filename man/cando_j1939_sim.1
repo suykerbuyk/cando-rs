@@ -1,0 +1,59 @@
+.ie \n(.g .ds Aq \(aq
+.el .ds Aq '
+.TH cando-j1939-sim 1  "cando-j1939-sim 0.1.0" 
+.SH NAME
+cando\-j1939\-sim \- J1939 (SAE J1939 Vehicle Bus Standard) Device Simulator
+.SH SYNOPSIS
+\fBcando\-j1939\-sim\fR [\fB\-\-config\fR] [\fB\-\-device\-name\fR] [\fB\-\-environment\fR] [\fB\-i\fR|\fB\-\-interface\fR] [\fB\-p\fR|\fB\-\-websocket\-port\fR] [\fB\-d\fR|\fB\-\-debug\fR] [\fB\-\-no\-websocket\fR] [\fB\-\-no\-console\fR] [\fB\-I\fR|\fB\-\-device\-id\fR] [\fB\-h\fR|\fB\-\-help\fR] [\fB\-V\fR|\fB\-\-version\fR] 
+.SH DESCRIPTION
+J1939 (SAE J1939 Vehicle Bus Standard) Device Simulator
+.SH OPTIONS
+.TP
+\fB\-\-config\fR \fI<CONFIG>\fR
+Path to configuration file
+
+If not provided, will search in standard locations: \- ./cando.yaml \- ~/.config/cando/cando.yaml \- /etc/cando/cando.yaml (Unix only)
+.TP
+\fB\-\-device\-name\fR \fI<DEVICE_NAME>\fR
+Device name from configuration file
+
+References a device by name or friendly_name from the config file. Example: \-\-device\-name "Device A"
+.TP
+\fB\-\-environment\fR \fI<ENVIRONMENT>\fR
+Environment name from configuration file
+
+References an environment by name from the config file. MUST be used together with \-\-device\-name for deterministic device resolution. Example: \-\-environment "test\-env" \-\-device\-name "test_device"
+.TP
+\fB\-i\fR, \fB\-\-interface\fR \fI<INTERFACE>\fR
+CAN interface to use (e.g., "can0", "vcan0")
+
+Overrides config file setting if provided.
+.TP
+\fB\-p\fR, \fB\-\-websocket\-port\fR \fI<WEBSOCKET_PORT>\fR
+WebSocket server port
+
+Overrides config file setting if provided.
+.TP
+\fB\-d\fR, \fB\-\-debug\fR
+Enable debug logging
+
+Overrides config file setting if provided.
+.TP
+\fB\-\-no\-websocket\fR
+Disable WebSocket server
+
+Takes precedence over config file setting.
+.TP
+\fB\-\-no\-console\fR
+Disable console output (quiet mode)
+.TP
+\fB\-I\fR, \fB\-\-device\-id\fR \fI<DEVICE_ID>\fR [default: 0x8A]
+Device ID (0x00\-0xFF)
+.TP
+\fB\-h\fR, \fB\-\-help\fR
+Print help (see a summary with \*(Aq\-h\*(Aq)
+.TP
+\fB\-V\fR, \fB\-\-version\fR
+Print version
+.SH VERSION
+v0.1.0

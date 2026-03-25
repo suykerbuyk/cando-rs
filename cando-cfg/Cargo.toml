@@ -1,0 +1,29 @@
+[package]
+name = "cando-cfg"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+description = "CLI tool for querying Cando configuration from scripts and automation"
+license.workspace = true
+
+[[bin]]
+name = "cando-cfg"
+path = "src/main.rs"
+
+[dependencies]
+cando-config = { path = "../cando-config" }
+clap.workspace = true
+anyhow.workspace = true
+serde_json.workspace = true
+dirs.workspace = true
+thiserror.workspace = true
+
+# Optional dependencies for manpage generation
+clap_mangen = { workspace = true, optional = true }
+
+[features]
+default = []
+manpages = ["clap_mangen"]
+
+[dev-dependencies]
+tempfile.workspace = true

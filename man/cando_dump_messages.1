@@ -1,0 +1,45 @@
+.ie \n(.g .ds Aq \(aq
+.el .ds Aq '
+.TH cando-dump-messages 1  "cando-dump-messages 0.1.0" 
+.SH NAME
+cando\-dump\-messages \- Message Dump Utility \- Comprehensive view of CAN messages and signals
+.SH SYNOPSIS
+\fBcando\-dump\-messages\fR [\fB\-\-format\fR] [\fB\-\-csv\fR] [\fB\-\-json\fR] [\fB\-p\fR|\fB\-\-protocol\fR] [\fB\-c\fR|\fB\-\-comments\fR] [\fB\-e\fR|\fB\-\-enums\fR] [\fB\-v\fR|\fB\-\-verbose\fR] [\fB\-\-full\fR] [\fB\-\-rust\-names\fR] [\fB\-h\fR|\fB\-\-help\fR] [\fB\-V\fR|\fB\-\-version\fR] 
+.SH DESCRIPTION
+Message Dump Utility \- Comprehensive view of CAN messages and signals
+.SH OPTIONS
+.TP
+\fB\-\-format\fR \fI<FORMAT>\fR [default: text]
+Output format: text, csv, or json
+.TP
+\fB\-\-csv\fR
+Shortcut for CSV output
+.TP
+\fB\-\-json\fR
+Shortcut for JSON output
+.TP
+\fB\-p\fR, \fB\-\-protocol\fR \fI<PROTOCOL>\fR [default: all]
+Protocol to display: j1939 or all
+.TP
+\fB\-c\fR, \fB\-\-comments\fR
+Show DBC comments and signal descriptions
+.TP
+\fB\-e\fR, \fB\-\-enums\fR
+Show value descriptions (enumerations)
+.TP
+\fB\-v\fR, \fB\-\-verbose\fR
+Show verbose output with all metadata (implies \-\-comments and \-\-enums)
+.TP
+\fB\-\-full\fR
+Show full output with all available metadata and formatting
+.TP
+\fB\-\-rust\-names\fR
+Output Rust snake_case field names instead of DBC PascalCase names
+.TP
+\fB\-h\fR, \fB\-\-help\fR
+Print help
+.TP
+\fB\-V\fR, \fB\-\-version\fR
+Print version
+.SH VERSION
+v0.1.0

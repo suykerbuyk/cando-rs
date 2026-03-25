@@ -1,0 +1,23 @@
+[package]
+name = "cando-config"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+repository.workspace = true
+
+description = "YAML-based configuration system for CAN-do tools and simulators"
+
+[dependencies]
+# Serialization
+serde.workspace = true
+serde_yml.workspace = true
+
+# File system utilities
+dirs.workspace = true
+
+# Error handling
+thiserror.workspace = true
+
+[dev-dependencies]
+tempfile.workspace = true

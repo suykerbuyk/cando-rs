@@ -1,0 +1,41 @@
+[package]
+name = "cando-core"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+repository.workspace = true
+description = "Core library for cando-rs CAN bus utilities"
+readme = "README.md"
+
+[lib]
+name = "cando_core"
+path = "src/lib.rs"
+
+[dependencies]
+anyhow.workspace = true
+can-dbc.workspace = true
+chrono.workspace = true
+clap.workspace = true
+ctrlc.workspace = true
+futures-util.workspace = true
+hex.workspace = true
+regex.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+csv.workspace = true
+socketcan.workspace = true
+tokio.workspace = true
+tokio-tungstenite.workspace = true
+tungstenite.workspace = true
+mockall.workspace = true
+clap_mangen = { workspace = true, optional = true }
+cando-messages.workspace = true
+
+[features]
+default = []
+manpages = ["clap_mangen"]
+
+[dev-dependencies]
+proptest.workspace = true
+tempfile.workspace = true

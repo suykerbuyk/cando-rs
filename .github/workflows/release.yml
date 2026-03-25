@@ -1,0 +1,282 @@
+name: Release Debian Packages
+
+on:
+    push:
+        tags:
+            - "v*"
+    workflow_dispatch:
+        inputs:
+            tag:
+                description: "Tag to release (e.g., v0.1.0)"
+                required: true
+                type: string
+
+env:
+    CARGO_TERM_COLOR: always
+    RUST_BACKTRACE: 1
+
+jobs:
+    build-debian-packages:
+        name: Build Debian Package (${{ matrix.target }})
+        runs-on: ubuntu-latest
+        strategy:
+            fail-fast: false
+            matrix:
+                include:
+                    - target: x86_64-unknown-linux-musl
+                      arch: amd64
+                    - target: aarch64-unknown-linux-musl
+                      arch: arm64
+
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v4
+
+            - name: Install Rust toolchain
+              uses: dtolnay/rust-toolchain@stable
+              with:
+                  targets: ${{ matrix.target }}
+
+            - name: Cache cargo registry
+              uses: actions/cache@v3
+              with:
+                  path: ~/.cargo/registry
+                  key: ${{ runner.os }}-cargo-registry-${{ hashFiles('**/Cargo.lock') }}
+
+            - name: Cache cargo index
+              uses: actions/cache@v3
+              with:
+                  path: ~/.cargo/git
+                  key: ${{ runner.os }}-cargo-index-${{ hashFiles('**/Cargo.lock') }}
+
+            - name: Cache target directory
+              uses: actions/cache@v3
+              with:
+                  path: target
+                  key: ${{ runner.os }}-target-${{ matrix.target }}-${{ hashFiles('**/Cargo.lock') }}
+
+            - name: Install cargo-deb
+              run: cargo install cargo-deb
+
+            - name: Build workspace binaries
+              run: |
+                  echo "Building all workspace binaries with ${{ matrix.target }}..."
+                  cargo build --workspace --release --target ${{ matrix.target }}
+
+            - name: Generate shell completions
+              run: |
+                  echo "Generating shell completions..."
+                  chmod +x scripts/packaging/generate-completions.sh
+                  ./scripts/packaging/generate-completions.sh ${{ matrix.target }} || true
+
+            - name: Build Debian package
+              run: |
+                  echo "Building Debian package for ${{ matrix.arch }}..."
+                  cargo deb -p cando-meta \
+                    --target=${{ matrix.target }} \
+                    --output=target/debian/ \
+                    -v
+
+            - name: List generated packages
+              run: |
+                  echo "Generated packages:"
+                  ls -lh target/debian/*.deb
+
+            - name: Verify package contents
+              run: |
+                  echo "Package info:"
+                  dpkg-deb --info target/debian/*.deb
+                  echo ""
+                  echo "Package contents (binaries only):"
+                  dpkg-deb --contents target/debian/*.deb | grep "usr/bin/"
+
+            - name: Upload Debian package
+              uses: actions/upload-artifact@v3
+              with:
+                  name: debian-packages
+                  path: target/debian/*.deb
+                  retention-days: 7
+
+    create-release:
+        name: Create GitHub Release
+        needs: build-debian-packages
+        runs-on: ubuntu-latest
+        permissions:
+            contents: write
+
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v4
+
+            - name: Download all artifacts
+              uses: actions/download-artifact@v3
+              with:
+                  name: debian-packages
+                  path: packages/
+
+            - name: List downloaded packages
+              run: |
+                  echo "Downloaded packages:"
+                  ls -lh packages/
+
+            - name: Generate checksums
+              run: |
+                  cd packages/
+                  sha256sum *.deb > SHA256SUMS
+                  cat SHA256SUMS
+
+            - name: Extract version from tag
+              id: version
+              run: |
+                  if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+                    TAG="${{ github.event.inputs.tag }}"
+                  else
+                    TAG="${{ github.ref_name }}"
+                  fi
+                  VERSION="${TAG#v}"
+                  echo "tag=$TAG" >> $GITHUB_OUTPUT
+                  echo "version=$VERSION" >> $GITHUB_OUTPUT
+
+            - name: Extract changelog for this version
+              id: changelog
+              run: |
+                  VERSION="${{ steps.version.outputs.version }}"
+                  if [ -f CHANGELOG.md ]; then
+                    # Extract section between ## [VERSION] and next ## or EOF
+                    CHANGELOG=$(sed -n "/^## \[$VERSION\]/,/^## \[/p" CHANGELOG.md | sed '$d' | tail -n +2)
+                    if [ -z "$CHANGELOG" ]; then
+                      CHANGELOG="See [CHANGELOG.md](https://github.com/${{ github.repository }}/blob/main/CHANGELOG.md) for details."
+                    fi
+                  else
+                    CHANGELOG="Release version $VERSION"
+                  fi
+                  echo "changelog<<EOF" >> $GITHUB_OUTPUT
+                  echo "$CHANGELOG" >> $GITHUB_OUTPUT
+                  echo "EOF" >> $GITHUB_OUTPUT
+
+            - name: Create Release
+              uses: softprops/action-gh-release@v1
+              with:
+                  tag_name: ${{ steps.version.outputs.tag }}
+                  name: Cando-RS ${{ steps.version.outputs.tag }}
+                  draft: false
+                  prerelease: false
+                  body: |
+                      # Cando-RS ${{ steps.version.outputs.tag }}
+
+                      Type-safe CAN bus toolkit with compile-time code generation.
+
+                      ## Installation
+
+                      ### Debian/Ubuntu (x86_64)
+                      ```bash
+                      wget https://github.com/${{ github.repository }}/releases/download/${{ steps.version.outputs.tag }}/cando-rs_${{ steps.version.outputs.version }}-1_amd64.deb
+                      sudo dpkg -i cando-rs_${{ steps.version.outputs.version }}-1_amd64.deb
+                      ```
+
+                      ### Raspberry Pi / ARM64
+                      ```bash
+                      wget https://github.com/${{ github.repository }}/releases/download/${{ steps.version.outputs.tag }}/cando-rs_${{ steps.version.outputs.version }}-1_arm64.deb
+                      sudo dpkg -i cando-rs_${{ steps.version.outputs.version }}-1_arm64.deb
+                      ```
+
+                      ## Package Contents
+
+                      - **CLI tools**: CAN utilities, simulators, codegen, and monitoring
+                      - **Man pages**: Full documentation (`man cando-util`)
+                      - **Shell completions**: bash, zsh, and fish support
+                      - **Zero dependencies**: Statically linked with musl
+
+                      ## Verify Checksums
+
+                      ```bash
+                      wget https://github.com/${{ github.repository }}/releases/download/${{ steps.version.outputs.tag }}/SHA256SUMS
+                      sha256sum -c SHA256SUMS
+                      ```
+
+                      ## Documentation
+
+                      - [Installation Guide](https://github.com/${{ github.repository }}/blob/main/doc/build-debian-install.md)
+                      - [Packaging Guide](https://github.com/${{ github.repository }}/blob/main/doc/build-debian-packaging.md)
+                      - [Project README](https://github.com/${{ github.repository }}/blob/main/README.md)
+
+                      ## What's Changed
+
+                      ${{ steps.changelog.outputs.changelog }}
+
+                      ## Supported Platforms
+
+                      - Ubuntu 20.04, 22.04, 24.04
+                      - Debian 11 (Bullseye), 12 (Bookworm)
+                      - Raspberry Pi OS (ARM64)
+                      - Any Debian-based distribution
+
+                      ---
+
+                      **Full Changelog**: https://github.com/${{ github.repository }}/blob/main/CHANGELOG.md
+                  files: |
+                      packages/*.deb
+                      packages/SHA256SUMS
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+            - name: Upload packages as artifacts (backup)
+              uses: actions/upload-artifact@v3
+              with:
+                  name: release-packages-${{ steps.version.outputs.version }}
+                  path: packages/
+                  retention-days: 90
+
+    test-installation:
+        name: Test Package Installation
+        needs: build-debian-packages
+        runs-on: ubuntu-latest
+        strategy:
+            matrix:
+                os:
+                    - ubuntu:22.04
+                    - ubuntu:24.04
+                    - debian:11
+                    - debian:12
+        container:
+            image: ${{ matrix.os }}
+
+        steps:
+            - name: Download amd64 package
+              uses: actions/download-artifact@v3
+              with:
+                  name: debian-packages
+                  path: packages/
+
+            - name: Install package
+              run: |
+                  apt-get update
+                  dpkg -i packages/cando-rs_*_amd64.deb || true
+
+            - name: Test binaries
+              run: |
+                  echo "Testing cando-util..."
+                  cando-util --version
+
+                  echo "Testing cando-dump..."
+                  cando-dump --version
+
+                  echo "All binaries working!"
+
+            - name: Test man pages
+              run: |
+                  apt-get install -y man-db
+                  man cando-util --pager=cat | head -20
+                  echo "Man pages working!"
+
+            - name: Uninstall package
+              run: |
+                  dpkg -r cando-rs
+
+                  # Verify removal
+                  if command -v cando-util; then
+                    echo "ERROR: cando-util still found after removal"
+                    exit 1
+                  fi
+
+                  echo "Clean uninstallation verified!"

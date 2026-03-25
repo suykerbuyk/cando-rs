@@ -1,0 +1,31 @@
+[package]
+name = "cando-dump"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+description = "Rust implementation of candump utility for CAN bus monitoring"
+license.workspace = true
+repository.workspace = true
+
+[[bin]]
+name = "cando-dump"
+path = "src/main.rs"
+
+[dependencies]
+cando-can-monitor = { path = "../cando-can-monitor" }
+cando-messages = { path = "../cando-messages" }
+socketcan.workspace = true
+clap.workspace = true
+clap_mangen = { workspace = true, optional = true }
+anyhow.workspace = true
+chrono.workspace = true
+tokio.workspace = true
+colored = "3.0"
+serde_json.workspace = true
+ctrlc.workspace = true
+
+[dev-dependencies]
+tempfile.workspace = true
+
+[features]
+manpages = ["clap_mangen"]

@@ -1,0 +1,23 @@
+[package]
+name = "cando-dump-messages"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+repository.workspace = true
+description = "DBC file message dump utility for cando-rs"
+
+[[bin]]
+name = "cando-dump-messages"
+path = "src/main.rs"
+
+[dependencies]
+cando-messages.workspace = true
+clap.workspace = true
+serde_json.workspace = true
+serde.workspace = true
+anyhow.workspace = true
+clap_mangen = { workspace = true, optional = true }
+
+[features]
+manpages = ["clap_mangen"]

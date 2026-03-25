@@ -1,0 +1,126 @@
+.ie \n(.g .ds Aq \(aq
+.el .ds Aq '
+.TH cando-cfg 1  "cando-cfg 0.1.0" 
+.SH NAME
+cando\-cfg \- CLI tool for querying Cando configuration from scripts and automation
+.SH SYNOPSIS
+\fBcando\-cfg\fR [\fB\-c\fR|\fB\-\-config\fR] [\fB\-e\fR|\fB\-\-environment\fR] [\fB\-f\fR|\fB\-\-format\fR] [\fB\-h\fR|\fB\-\-help\fR] [\fB\-V\fR|\fB\-\-version\fR] [\fIsubcommands\fR]
+.SH DESCRIPTION
+CLI tool for querying Cando configuration from scripts and automation
+.SH OPTIONS
+.TP
+\fB\-c\fR, \fB\-\-config\fR \fI<FILE>\fR
+Path to configuration file
+
+If not specified, searches default locations: ./cando.yaml, ~/.config/cando/cando.yaml
+.TP
+\fB\-e\fR, \fB\-\-environment\fR \fI<NAME>\fR
+Environment to validate (validates only this environment instead of entire config)
+
+When specified, only the devices and configuration relevant to this environment are validated. This avoids validation warnings for unused environments. If not specified, the entire configuration file is validated.
+.TP
+\fB\-f\fR, \fB\-\-format\fR \fI<FORMAT>\fR [default: shell]
+Output format for show\-device command
+.br
+
+.br
+\fIPossible values:\fR
+.RS 14
+.IP \(bu 2
+shell: Shell\-friendly key=value format
+.IP \(bu 2
+json: JSON format
+.IP \(bu 2
+pretty: Human\-readable format
+.RE
+.TP
+\fB\-h\fR, \fB\-\-help\fR
+Print help (see a summary with \*(Aq\-h\*(Aq)
+.TP
+\fB\-V\fR, \fB\-\-version\fR
+Print version
+.SH SUBCOMMANDS
+.TP
+cando\-cfg\-get\-device\-id(1)
+Get device ID (e.g., 0x82)
+.TP
+cando\-cfg\-get\-port(1)
+Get WebSocket port number
+.TP
+cando\-cfg\-get\-interface(1)
+Get CAN interface name
+.TP
+cando\-cfg\-get\-type(1)
+Get device type (j1939, etc.)
+.TP
+cando\-cfg\-get\-variant(1)
+Get device variant
+.TP
+cando\-cfg\-list\-devices(1)
+List all devices
+.TP
+cando\-cfg\-show\-device(1)
+Show complete device configuration
+.TP
+cando\-cfg\-list\-environments(1)
+List all environments
+.TP
+cando\-cfg\-show\-environment(1)
+Show environment details
+.TP
+cando\-cfg\-get\-test\-source(1)
+Get standard test source device ID
+.TP
+cando\-cfg\-list\-test\-sources(1)
+List all test source device IDs (standard + variants)
+.TP
+cando\-cfg\-get\-test\-variant\-sources(1)
+Get variant test source device IDs for multi\-source tests
+.TP
+cando\-cfg\-help(1)
+Print this message or the help of the given subcommand(s)
+.SH EXTRA
+EXAMPLES:
+    # Get device ID for a device
+    cando\-cfg get\-device\-id "Test Device"
+
+    # Get WebSocket port for J1939 simulator
+    cando\-cfg get\-port "J1939 Test ECU"
+
+    # Get CAN interface
+    cando\-cfg get\-interface "Test Device"
+
+    # List all enabled devices
+    cando\-cfg list\-enabled\-devices
+
+    # Show complete device info
+    cando\-cfg show\-device "Test Device"
+
+    # Get standard test source device ID
+    cando\-cfg get\-test\-source
+
+    # List all test sources (standard + variants)
+    cando\-cfg list\-test\-sources
+
+    # Get only variant test sources
+    cando\-cfg get\-test\-variant\-sources
+
+    # Use custom config file
+    cando\-cfg \-\-config custom.yaml get\-device\-id "Fan A"
+
+CONFIGURATION FILE:
+    Default search path (first found):
+      1. \-\-config argument
+      2. CANDO_CONFIG environment variable
+      3. ./cando.yaml
+      4. ~/.config/cando/cando.yaml
+
+EXIT CODES:
+    0 \- Success
+    1 \- Configuration error (file not found, parse error)
+    2 \- Device not found
+    3 \- Invalid query (missing field, etc.)
+.SH VERSION
+v0.1.0
+.SH AUTHORS
+John Suykerbuyk <john@syketech.com>

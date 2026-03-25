@@ -1,0 +1,140 @@
+[workspace]
+   resolver = "2"
+   members = [
+       "cando-messages",
+       "cando-config",
+       "cando-core",
+       "cando-simulator-common",
+       "cando-send",
+       "cando-dump",
+       "cando-monitor",
+       "cando-cfg",
+       "cando-log-analyzer",
+       "cando-can-monitor",
+       "cando-codegen",
+       "cando-j1939-sim",
+       "cando-util",
+       "cando-dump-messages",
+       "cando-ws-query",
+       "cando-meta",
+   ]
+
+   [workspace.package]
+   edition = "2024"
+   version = "0.1.0"
+   authors = ["John Suykerbuyk <john@syketech.com>"]
+   license = "MIT OR Apache-2.0"
+   repository = "https://github.com/suykerbuyk/cando-rs"
+
+   # Workspace-wide dependencies (shared across members)
+   [workspace.dependencies]
+   # ============================================================================
+   # ERROR HANDLING
+   # ============================================================================
+   anyhow = "1.0.100"
+   thiserror = "2.0"
+
+   # ============================================================================
+   # CLI PARSING
+   # ============================================================================
+   clap = { version = "4.5.51", features = ["derive"] }
+   clap_mangen = "0.2"
+
+   # ============================================================================
+   # SERIALIZATION
+   # ============================================================================
+   serde = { version = "1.0.228", features = ["derive"] }
+   serde_json = "1.0.145"
+   serde_yml = "0.0.12"
+
+   # ============================================================================
+   # ASYNC RUNTIME
+   # ============================================================================
+   tokio = { version = "1.48.0", features = ["full"] }
+   tokio-test = "0.4"
+
+   # ============================================================================
+   # NETWORKING / WEBSOCKET
+   # ============================================================================
+   socketcan = "3.5.0"
+   tungstenite = "0.28"
+   tokio-tungstenite = "0.28"
+   futures = "0.3"
+   futures-util = "0.3.31"
+
+   # ============================================================================
+   # TIME / DATE
+   # ============================================================================
+   chrono = { version = "0.4.42", features = ["serde"] }
+
+   # ============================================================================
+   # LOGGING / TRACING
+   # ============================================================================
+   tracing = "0.1"
+   tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+
+   # ============================================================================
+   # CAN / DBC PROTOCOLS
+   # ============================================================================
+   can-dbc = "8.0"
+
+   # ============================================================================
+   # UTILITIES
+   # ============================================================================
+   hex = "0.4.3"
+   regex = "1.12.2"
+   csv = "1.4.0"
+   bitvec = "1.0"
+   ctrlc = "3.5.1"
+   rand = "0.9"
+   sha2 = "0.10"
+   zmq = "0.10.0"
+   dirs = "6.0"
+   ratatui = "0.30"
+
+   # ============================================================================
+   # CODE GENERATION
+   # ============================================================================
+   quote = "1.0"
+   syn = { version = "2.0", features = ["full"] }
+   proc-macro2 = "1.0"
+
+   # ============================================================================
+   # TESTING (dev-dependencies)
+   # ============================================================================
+   criterion = { version = "0.5", features = ["html_reports"] }
+   mockall = "0.14"
+   proptest = "1.9.0"
+   tempfile = "3.23.0"
+
+   # ============================================================================
+   # INTERNAL WORKSPACE CRATES
+   # ============================================================================
+   cando-messages = { path = "cando-messages" }
+   cando-core = { path = "cando-core" }
+   cando-can-monitor = { path = "cando-can-monitor" }
+   cando-simulator-common = { path = "cando-simulator-common" }
+   cando-config = { path = "cando-config" }
+
+   # Suppress deprecation warnings during migration period
+   [workspace.lints.rust]
+   deprecated = "allow"
+
+# ============================================================================
+# BUILD PROFILES
+# ============================================================================
+
+# Optimize third-party dependencies in dev builds for faster test execution
+[profile.dev.package."*"]
+opt-level = 2
+
+[profile.release]
+opt-level = 3
+lto = "thin"
+strip = true
+
+# Release with debug symbols for profiling (flamegraph, perf)
+[profile.release-with-debug]
+inherits = "release"
+debug = true
+strip = false

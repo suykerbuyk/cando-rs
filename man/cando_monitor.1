@@ -1,0 +1,36 @@
+.ie \n(.g .ds Aq \(aq
+.el .ds Aq '
+.TH cando-monitor 1  "cando-monitor 0.1.0" 
+.SH NAME
+cando\-monitor \- Real\-time CAN bus monitoring utility for J1939 systems
+.SH SYNOPSIS
+\fBcando\-monitor\fR [\fB\-d\fR|\fB\-\-decoded\-only\fR] [\fB\-f\fR|\fB\-\-filter\fR] [\fB\-r\fR|\fB\-\-show\-raw\fR] [\fB\-q\fR|\fB\-\-quiet\fR] [\fB\-\-stats\-interval\fR] [\fB\-h\fR|\fB\-\-help\fR] [\fB\-V\fR|\fB\-\-version\fR] <\fIINTERFACE\fR> 
+.SH DESCRIPTION
+Real\-time CAN bus monitoring utility for J1939 systems
+.SH OPTIONS
+.TP
+\fB\-d\fR, \fB\-\-decoded\-only\fR
+Show only decoded messages (hide unknown messages)
+.TP
+\fB\-f\fR, \fB\-\-filter\fR \fI<FILTER>\fR
+Show only specific message types (comma\-separated list)
+.TP
+\fB\-r\fR, \fB\-\-show\-raw\fR
+Show raw hex dumps along with decoded messages
+.TP
+\fB\-q\fR, \fB\-\-quiet\fR
+Quiet mode \- reduce output verbosity
+.TP
+\fB\-\-stats\-interval\fR \fI<STATS_INTERVAL>\fR [default: 30]
+Show statistics every N seconds
+.TP
+\fB\-h\fR, \fB\-\-help\fR
+Print help
+.TP
+\fB\-V\fR, \fB\-\-version\fR
+Print version
+.TP
+<\fIINTERFACE\fR>
+CAN interface name (e.g., can0, vcan0)
+.SH VERSION
+v0.1.0

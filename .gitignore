@@ -1,0 +1,21 @@
+target/*
+benchmarks/*
+logs/*
+.claude/*
+
+# DBC files are proprietary and not redistributable
+# (but generated Rust code is derivative work and IS included)
+dbc/
+
+commit.msg
+*.log
+
+# Profiling artifacts
+flamegraph.svg
+perf.data
+perf.data.old
+
+# Test artifacts
+playwright-report/*
+test-results/*
+/CLAUDE.md

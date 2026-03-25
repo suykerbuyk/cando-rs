@@ -1,0 +1,33 @@
+[package]
+name = "cando-util"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+repository.workspace = true
+description = "Main CLI utility for CAN bus analysis"
+
+[[bin]]
+name = "cando-util"
+path = "src/main.rs"
+
+[dependencies]
+cando-core.workspace = true
+cando-config.workspace = true
+cando-messages.workspace = true
+anyhow.workspace = true
+chrono.workspace = true
+clap.workspace = true
+clap_mangen = { workspace = true, optional = true }
+serde.workspace = true
+serde_json.workspace = true
+socketcan.workspace = true
+
+# TUI dependencies for interactive message builder
+ratatui.workspace = true
+crossterm = "0.29"
+arboard = "3.6"
+base64 = "0.22"  # For OSC 52 clipboard over SSH
+
+[features]
+manpages = ["clap_mangen"]

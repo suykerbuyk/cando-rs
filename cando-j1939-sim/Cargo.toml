@@ -1,0 +1,44 @@
+[package]
+name = "cando-j1939-sim"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+repository.workspace = true
+
+[lib]
+name = "cando_j1939_sim"
+path = "src/lib.rs"
+
+[[bin]]
+name = "cando-j1939-sim"
+path = "src/main.rs"
+
+[dependencies]
+anyhow.workspace = true
+clap.workspace = true
+socketcan.workspace = true
+tokio.workspace = true
+tokio-tungstenite.workspace = true
+tungstenite.workspace = true
+futures-util.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+chrono.workspace = true
+cando-messages.workspace = true
+cando-simulator-common.workspace = true
+cando-config.workspace = true
+
+[dev-dependencies]
+criterion.workspace = true
+tempfile.workspace = true
+
+[[bench]]
+name = "physics_bench"
+harness = false
+[features]
+manpages = ["clap_mangen"]
+
+[dependencies.clap_mangen]
+version = "0.2"
+optional = true

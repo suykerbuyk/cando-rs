@@ -1,0 +1,43 @@
+[package]
+name = "cando-can-monitor"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+repository.workspace = true
+description = "Shared CAN monitoring library for reading from multiple interfaces and replaying candump logs"
+
+[dependencies]
+# CAN interface support
+socketcan.workspace = true
+
+# Async runtime
+tokio.workspace = true
+futures-util.workspace = true
+
+# Cando workspace dependencies
+cando-messages.workspace = true
+cando-core.workspace = true
+
+# Error handling
+anyhow.workspace = true
+thiserror.workspace = true
+
+# Serialization
+serde.workspace = true
+serde_json.workspace = true
+
+# Time handling
+chrono.workspace = true
+
+# Structured logging
+tracing.workspace = true
+tracing-subscriber.workspace = true
+
+[dev-dependencies]
+tokio-test.workspace = true
+tempfile.workspace = true
+
+[lib]
+name = "cando_can_monitor"
+path = "src/lib.rs"

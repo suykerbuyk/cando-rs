@@ -1,0 +1,957 @@
+====================================================================================================
+CANDO-RS PROJECT - COMPREHENSIVE LICENSE INVENTORY
+====================================================================================================
+
+Report Date: 2025
+Project: Cando-RS - CAN Bus Protocol Implementation Framework
+Repository: https://github.com/suykerbuyk/cando-rs
+
+SUMMARY:
+  Total Packages: 551
+  Internal Workspace Crates: 21
+  External Dependencies: 529
+
+====================================================================================================
+SECTION 1: PROJECT LICENSE
+====================================================================================================
+
+License: MIT OR Apache-2.0 (Dual Licensed)
+
+Users may choose either:
+  • MIT License - https://opensource.org/licenses/MIT
+  • Apache License 2.0 - https://www.apache.org/licenses/LICENSE-2.0
+
+This allows maximum flexibility for both open-source and commercial use.
+
+====================================================================================================
+SECTION 2: INTERNAL WORKSPACE CRATES (Project Components)
+====================================================================================================
+
+All 21 internal crates are dual-licensed: MIT OR Apache-2.0
+
+  • can-log-analyzer                         v0.3.0      MIT OR Apache-2.0
+  • candump-rs                               v0.3.0      MIT OR Apache-2.0
+  • cansend-rs                               v0.3.0      MIT OR Apache-2.0
+  • count-hvpc-signals                       v0.3.0      MIT OR Apache-2.0
+  • dump-messages                            v0.3.0      MIT OR Apache-2.0
+  • emp-simulator                            v0.3.0      MIT OR Apache-2.0
+  • hvpc-simulator                           v0.3.0      MIT OR Apache-2.0
+  • j1939-simulator                          v0.3.0      MIT OR Apache-2.0
+  • monitor-can                              v0.3.0      MIT OR Apache-2.0
+  • cando-can-monitor                      v0.3.0      MIT OR Apache-2.0
+  • cando-cfg                              v0.3.0      MIT OR Apache-2.0
+  • cando-codegen                          v0.3.0      MIT OR Apache-2.0
+  • cando-config                           v0.3.0      MIT OR Apache-2.0
+  • cando-core                             v0.3.0      MIT OR Apache-2.0
+  • cando-messages                         v0.3.0      MIT OR Apache-2.0
+  • cando-meta                             v0.3.0      MIT OR Apache-2.0
+  • cando-simulator-common                 v0.3.0      MIT OR Apache-2.0
+  • cando-webui                            v0.3.0      MIT OR Apache-2.0
+  • rust-can-util                            v0.3.0      MIT OR Apache-2.0
+  • rust-websocket-query                     v0.3.0      MIT OR Apache-2.0
+  • udc-simulator                            v0.3.0      MIT OR Apache-2.0
+
+====================================================================================================
+SECTION 3: EXTERNAL DEPENDENCIES - LICENSE SUMMARY
+====================================================================================================
+
+Total: 529 external crates from crates.io
+
+License                                                                     Count
+----------------------------------------------------------------------------------
+MIT OR Apache-2.0                                                             259
+MIT                                                                           124
+MIT/Apache-2.0                                                                 31
+Unicode-3.0                                                                    18
+Apache-2.0 OR MIT                                                              17
+Apache-2.0                                                                     10
+Unlicense OR MIT                                                                7
+Zlib OR Apache-2.0 OR MIT                                                       7
+Apache-2.0 WITH LLVM-exception OR Apache-2.0 OR MIT                             5
+BSD-3-Clause                                                                    4
+MIT OR Apache-2.0 OR Zlib                                                       4
+Unlicense/MIT                                                                   4
+Apache-2.0 OR ISC OR MIT                                                        3
+Apache-2.0/MIT                                                                  3
+Zlib                                                                            3
+BSD-2-Clause OR Apache-2.0 OR MIT                                               2
+BSD-3-Clause OR Apache-2.0                                                      2
+BSL-1.0                                                                         2
+CC0-1.0 OR MIT-0 OR Apache-2.0                                                  2
+ISC                                                                             2
+MPL-2.0                                                                         2
+(Apache-2.0 OR MIT) AND BSD-3-Clause                                            1
+(MIT OR Apache-2.0) AND Unicode-3.0                                             1
+(MIT OR Apache-2.0) AND Unicode-DFS-2016                                        1
+0BSD OR MIT OR Apache-2.0                                                       1
+Apache-2.0 / MIT                                                                1
+Apache-2.0 AND ISC                                                              1
+Apache-2.0 OR BSL-1.0                                                           1
+Apache-2.0 WITH LLVM-exception                                                  1
+CC0-1.0 OR MIT-0                                                                1
+CDLA-Permissive-2.0                                                             1
+ISC AND (Apache-2.0 OR ISC)                                                     1
+ISC AND (Apache-2.0 OR ISC) AND OpenSSL                                         1
+MIT AND BSD-3-Clause                                                            1
+MIT AND Unicode-DFS-2016                                                        1
+MIT OR Apache-2.0 OR LGPL-2.1-or-later                                          1
+MIT OR Zlib OR Apache-2.0                                                       1
+WTFPL                                                                           1
+bzip2-1.0.6                                                                     1
+
+====================================================================================================
+SECTION 4: LICENSE COMPATIBILITY ANALYSIS
+====================================================================================================
+
+License Category Breakdown:
+
+  ✓ Permissive (MIT, Apache, BSD, ISC, etc.):     493 crates
+  ✓ Weak Copyleft (MPL-2.0):                        3 crates
+  ✓ Public Domain / Unlicense:                     16 crates
+  ✓ Unicode Data Files:                            21 crates
+  ✓ Special/Compound licenses:                      7 crates
+
+COMPATIBILITY ASSESSMENT:
+
+  ✓ COMPATIBLE: Project is dual-licensed as MIT OR Apache-2.0
+  ✓ COMPATIBLE: All dependencies are compatible with MIT/Apache-2.0
+  ✓ COMPATIBLE: No strong copyleft (GPL) dependencies detected
+  ✓ COMPATIBLE: MPL-2.0 is file-level copyleft (compatible with this project)
+  ✓ COMPATIBLE: All licenses allow commercial and proprietary use
+
+COPYLEFT ANALYSIS:
+
+  • MPL-2.0 Dependencies (2 crates):
+    - colored v3.1.1
+    - option-ext v0.2.0
+
+    NOTE: MPL-2.0 is a weak copyleft license (file-level, not project-level).
+          Modifications to MPL files must be released under MPL-2.0, but
+          the overall project can remain under MIT/Apache-2.0.
+
+  • LGPL Dual-Licensed (1 crates):
+    - r-efi v5.3.0
+
+    NOTE: These crates offer MIT/Apache-2.0 options, so LGPL obligations
+          do not apply to this project.
+
+CONCLUSION:
+
+  All 529 external dependencies are fully compatible with
+  commercial and proprietary use. This project can be freely used,
+  modified, and distributed under either MIT or Apache-2.0 license terms.
+  No licensing conflicts or compliance issues detected.
+
+====================================================================================================
+SECTION 5: DETAILED DEPENDENCY LIST BY LICENSE CATEGORY
+====================================================================================================
+
+
+----------------------------------------------------------------------------------------------------
+LICENSE: MIT OR Apache-2.0
+COUNT: 259 crates
+----------------------------------------------------------------------------------------------------
+
+  • aes                                 v0.8.4        https://github.com/RustCrypto/block-ciphers
+  • allocator-api2                      v0.2.21       https://github.com/zakarumych/allocator-api2
+  • anstream                            v0.6.21       https://github.com/rust-cli/anstyle.git
+  • anstyle                             v1.0.13       https://github.com/rust-cli/anstyle.git
+  • anstyle-parse                       v0.2.7        https://github.com/rust-cli/anstyle.git
+  • anstyle-query                       v1.1.5        https://github.com/rust-cli/anstyle.git
+  • anstyle-wincon                      v3.0.11       https://github.com/rust-cli/anstyle.git
+  • anyhow                              v1.0.100      https://github.com/dtolnay/anyhow
+  • arboard                             v3.6.1        https://github.com/1Password/arboard
+  • async-trait                         v0.1.89       https://github.com/dtolnay/async-trait
+  • base64                              v0.22.1       https://github.com/marshallpierce/rust-base64
+  • bitflags                            v2.10.0       https://github.com/bitflags/bitflags
+  • block-buffer                        v0.10.4       https://github.com/RustCrypto/utils
+  • bstr                                v1.12.1       https://github.com/BurntSushi/bstr
+  • bumpalo                             v3.19.1       https://github.com/fitzgen/bumpalo
+  • bzip2                               v0.6.1        https://github.com/trifectatechfoundation/bzip2-rs
+  • can-dbc                             v8.1.0        https://github.com/oxibus/can-dbc
+  • can-dbc-pest                        v0.7.2        https://github.com/oxibus/can-dbc-pest
+  • cc                                  v1.2.54       https://github.com/rust-lang/cc-rs
+  • cfg-expr                            v0.15.8       https://github.com/EmbarkStudios/cfg-expr
+  • cfg-if                              v1.0.4        https://github.com/rust-lang/cfg-if
+  • chrono                              v0.4.43       https://github.com/chronotope/chrono
+  • chrono-tz                           v0.9.0        https://github.com/chronotope/chrono-tz
+  • chrono-tz-build                     v0.3.0        https://github.com/chronotope/chrono-tz
+  • cipher                              v0.4.4        https://github.com/RustCrypto/traits
+  • clap                                v4.5.54       https://github.com/clap-rs/clap
+  • clap_builder                        v4.5.54       https://github.com/clap-rs/clap
+  • clap_derive                         v4.5.49       https://github.com/clap-rs/clap
+  • clap_lex                            v0.7.7        https://github.com/clap-rs/clap
+  • clap_mangen                         v0.2.31       https://github.com/clap-rs/clap
+  • cmake                               v0.1.57       https://github.com/rust-lang/cmake-rs
+  • colorchoice                         v1.0.4        https://github.com/rust-cli/anstyle.git
+  • core-foundation                     v0.10.1       https://github.com/servo/core-foundation-rs
+  • core-foundation                     v0.9.4        https://github.com/servo/core-foundation-rs
+  • core-foundation-sys                 v0.8.7        https://github.com/servo/core-foundation-rs
+  • cpufeatures                         v0.2.17       https://github.com/RustCrypto/utils
+  • crc                                 v3.3.0        https://github.com/mrhooray/crc-rs.git
+  • crc-catalog                         v2.4.0        https://github.com/akhilles/crc-catalog.git
+  • crc32fast                           v1.5.0        https://github.com/srijs/rust-crc32fast
+  • crossbeam                           v0.8.4        https://github.com/crossbeam-rs/crossbeam
+  • crossbeam-channel                   v0.5.15       https://github.com/crossbeam-rs/crossbeam
+  • crossbeam-deque                     v0.8.6        https://github.com/crossbeam-rs/crossbeam
+  • crossbeam-epoch                     v0.9.18       https://github.com/crossbeam-rs/crossbeam
+  • crossbeam-queue                     v0.3.12       https://github.com/crossbeam-rs/crossbeam
+  • crossbeam-utils                     v0.8.21       https://github.com/crossbeam-rs/crossbeam
+  • crypto-common                       v0.1.7        https://github.com/RustCrypto/traits
+  • csscolorparser                      v0.6.2        https://github.com/mazznoer/csscolorparser-rs
+  • dary_heap                           v0.3.8        https://github.com/hanmertens/dary_heap
+  • deranged                            v0.5.5        https://github.com/jhpratt/deranged
+  • digest                              v0.10.7       https://github.com/RustCrypto/traits
+  • dirs                                v6.0.0        https://github.com/soc/dirs-rs
+  • dirs-sys                            v0.5.0        https://github.com/dirs-dev/dirs-sys-rs
+  • displaydoc                          v0.2.5        https://github.com/yaahc/displaydoc
+  • document-features                   v0.2.12       https://github.com/slint-ui/document-features
+  • either                              v1.15.0       https://github.com/rayon-rs/either
+  • embedded-can                        v0.4.1        https://github.com/rust-embedded/embedded-hal
+  • errno                               v0.3.14       https://github.com/lambda-fairy/rust-errno
+  • euclid                              v0.22.13      https://github.com/servo/euclid
+  • fdeflate                            v0.3.7        https://github.com/image-rs/fdeflate
+  • find-msvc-tools                     v0.1.8        https://github.com/rust-lang/cc-rs
+  • flate2                              v1.1.8        https://github.com/rust-lang/flate2-rs
+  • form_urlencoded                     v1.2.2        https://github.com/servo/rust-url
+  • futures                             v0.3.31       https://github.com/rust-lang/futures-rs
+  • futures-channel                     v0.3.31       https://github.com/rust-lang/futures-rs
+  • futures-core                        v0.3.31       https://github.com/rust-lang/futures-rs
+  • futures-executor                    v0.3.31       https://github.com/rust-lang/futures-rs
+  • futures-io                          v0.3.31       https://github.com/rust-lang/futures-rs
+  • futures-macro                       v0.3.31       https://github.com/rust-lang/futures-rs
+  • futures-sink                        v0.3.31       https://github.com/rust-lang/futures-rs
+  • futures-task                        v0.3.31       https://github.com/rust-lang/futures-rs
+  • futures-util                        v0.3.31       https://github.com/rust-lang/futures-rs
+  • getrandom                           v0.2.17       https://github.com/rust-random/getrandom
+  • getrandom                           v0.3.4        https://github.com/rust-random/getrandom
+  • glob                                v0.3.3        https://github.com/rust-lang/glob
+  • half                                v2.7.1        https://github.com/VoidStarKat/half-rs
+  • hashbrown                           v0.16.1       https://github.com/rust-lang/hashbrown
+  • heck                                v0.5.0        https://github.com/withoutboats/heck
+  • hex                                 v0.4.3        https://github.com/KokaKiwi/rust-hex
+  • hmac                                v0.12.1       https://github.com/RustCrypto/MACs
+  • http                                v1.4.0        https://github.com/hyperium/http
+  • httparse                            v1.10.1       https://github.com/seanmonstar/httparse
+  • httpdate                            v1.0.3        https://github.com/pyfisch/httpdate
+  • iana-time-zone                      v0.1.64       https://github.com/strawlab/iana-time-zone
+  • iana-time-zone-haiku                v0.1.2        https://github.com/strawlab/iana-time-zone
+  • idna                                v1.1.0        https://github.com/servo/rust-url/
+  • image                               v0.25.9       https://github.com/image-rs/image
+  • indoc                               v2.0.7        https://github.com/dtolnay/indoc
+  • inout                               v0.1.4        https://github.com/RustCrypto/utils
+  • ipnet                               v2.11.0       https://github.com/krisprice/ipnet
+  • iri-string                          v0.7.10       https://github.com/lo48576/iri-string
+  • is_terminal_polyfill                v1.70.2       https://github.com/polyfill-rs/is_terminal_polyfill
+  • itertools                           v0.13.0       https://github.com/rust-itertools/itertools
+  • itertools                           v0.14.0       https://github.com/rust-itertools/itertools
+  • itoa                                v1.0.17       https://github.com/dtolnay/itoa
+  • jobserver                           v0.1.34       https://github.com/rust-lang/jobserver-rs
+  • js-sys                              v0.3.85       https://github.com/wasm-bindgen/wasm-bindgen/tree/master/cra...
+  • kasuari                             v0.4.11       https://github.com/ratatui/kasuari
+  • lazy_static                         v1.5.0        https://github.com/rust-lang-nursery/lazy-static.rs
+  • libc                                v0.2.180      https://github.com/rust-lang/libc
+  • line-clipping                       v0.3.5        https://github.com/joshka/line-clipping
+  • litrs                               v1.0.0        https://github.com/LukasKalbertodt/litrs
+  • lock_api                            v0.4.14       https://github.com/Amanieu/parking_lot
+  • log                                 v0.4.29       https://github.com/rust-lang/log
+  • mac_address                         v1.1.8        https://github.com/rep-nop/mac_address
+  • mime                                v0.3.17       https://github.com/hyperium/mime
+  • mockall                             v0.14.0       https://github.com/asomers/mockall
+  • mockall_derive                      v0.14.0       https://github.com/asomers/mockall
+  • native-tls                          v0.2.14       https://github.com/sfackler/rust-native-tls
+  • nb                                  v1.1.0        https://github.com/rust-embedded/nb
+  • num-conv                            v0.2.0        https://github.com/jhpratt/num-conv
+  • num-derive                          v0.4.2        https://github.com/rust-num/num-derive
+  • num-traits                          v0.2.19       https://github.com/rust-num/num-traits
+  • num_threads                         v0.1.7        https://github.com/jhpratt/num_threads
+  • once_cell                           v1.21.3       https://github.com/matklad/once_cell
+  • once_cell_polyfill                  v1.70.2       https://github.com/polyfill-rs/once_cell_polyfill
+  • openssl-probe                       v0.2.1        https://github.com/rustls/openssl-probe
+  • parking_lot                         v0.12.5       https://github.com/Amanieu/parking_lot
+  • parking_lot_core                    v0.9.12       https://github.com/Amanieu/parking_lot
+  • pbkdf2                              v0.12.2       https://github.com/RustCrypto/password-hashes/tree/master/pb...
+  • percent-encoding                    v2.3.2        https://github.com/servo/rust-url/
+  • pest                                v2.8.5        https://github.com/pest-parser/pest
+  • pest_derive                         v2.8.5        https://github.com/pest-parser/pest
+  • pest_generator                      v2.8.5        https://github.com/pest-parser/pest
+  • pest_meta                           v2.8.5        https://github.com/pest-parser/pest
+  • pin-utils                           v0.1.0        https://github.com/rust-lang-nursery/pin-utils
+  • pkg-config                          v0.3.32       https://github.com/rust-lang/pkg-config-rs
+  • png                                 v0.18.0       https://github.com/image-rs/image-png
+  • powerfmt                            v0.2.0        https://github.com/jhpratt/powerfmt
+  • ppv-lite86                          v0.2.21       https://github.com/cryptocorrosion/cryptocorrosion
+  • predicates                          v3.1.3        https://github.com/assert-rs/predicates-rs
+  • predicates-core                     v1.0.9        https://github.com/assert-rs/predicates-rs/tree/master/crate...
+  • predicates-tree                     v1.0.12       https://github.com/assert-rs/predicates-rs/tree/master/crate...
+  • proc-macro-error                    v1.0.4        https://gitlab.com/CreepySkeleton/proc-macro-error
+  • proc-macro-error-attr               v1.0.4        https://gitlab.com/CreepySkeleton/proc-macro-error
+  • proc-macro2                         v1.0.106      https://github.com/dtolnay/proc-macro2
+  • proptest                            v1.9.0        https://github.com/proptest-rs/proptest
+  • quinn                               v0.11.9       https://github.com/quinn-rs/quinn
+  • quinn-proto                         v0.11.13      https://github.com/quinn-rs/quinn
+  • quinn-udp                           v0.5.14       https://github.com/quinn-rs/quinn
+  • quote                               v1.0.44       https://github.com/dtolnay/quote
+  • rand                                v0.8.5        https://github.com/rust-random/rand
+  • rand                                v0.9.2        https://github.com/rust-random/rand
+  • rand_chacha                         v0.3.1        https://github.com/rust-random/rand
+  • rand_chacha                         v0.9.0        https://github.com/rust-random/rand
+  • rand_core                           v0.6.4        https://github.com/rust-random/rand
+  • rand_core                           v0.9.5        https://github.com/rust-random/rand
+  • rand_xorshift                       v0.4.0        https://github.com/rust-random/rngs
+  • rayon                               v1.11.0       https://github.com/rayon-rs/rayon
+  • rayon-core                          v1.13.0       https://github.com/rayon-rs/rayon
+  • regex                               v1.12.2       https://github.com/rust-lang/regex
+  • regex-automata                      v0.4.13       https://github.com/rust-lang/regex
+  • regex-syntax                        v0.8.8        https://github.com/rust-lang/regex
+  • reqwest                             v0.13.1       https://github.com/seanmonstar/reqwest
+  • rle-decode-fast                     v1.0.3        https://github.com/WanzenBug/rle-decode-helper
+  • roff                                v0.2.2        https://github.com/rust-cli/roff-rs
+  • rustc_version                       v0.4.1        https://github.com/djc/rustc-version-rs
+  • rustls-pki-types                    v1.14.0       https://github.com/rustls/pki-types
+  • rustls-platform-verifier            v0.6.2        https://github.com/rustls/rustls-platform-verifier
+  • rustls-platform-verifier-android    v0.1.1        https://github.com/rustls/rustls-platform-verifier
+  • rustversion                         v1.0.22       https://github.com/dtolnay/rustversion
+  • scopeguard                          v1.2.0        https://github.com/bluss/scopeguard
+  • security-framework                  v2.11.1       https://github.com/kornelski/rust-security-framework
+  • security-framework                  v3.5.1        https://github.com/kornelski/rust-security-framework
+  • security-framework-sys              v2.15.0       https://github.com/kornelski/rust-security-framework
+  • semver                              v1.0.27       https://github.com/dtolnay/semver
+  • serde                               v1.0.228      https://github.com/serde-rs/serde
+  • serde_core                          v1.0.228      https://github.com/serde-rs/serde
+  • serde_derive                        v1.0.228      https://github.com/serde-rs/serde
+  • serde_json                          v1.0.149      https://github.com/serde-rs/json
+  • serde_path_to_error                 v0.1.20       https://github.com/dtolnay/path-to-error
+  • serde_spanned                       v0.6.9        https://github.com/toml-rs/toml
+  • serde_yaml                          v0.9.34+deprecated https://github.com/dtolnay/serde-yaml
+  • sha1                                v0.10.6       https://github.com/RustCrypto/hashes
+  • sha2                                v0.10.9       https://github.com/RustCrypto/hashes
+  • shlex                               v1.3.0        https://github.com/comex/rust-shlex
+  • signal-hook-mio                     v0.2.5        https://github.com/vorner/signal-hook
+  • signal-hook-registry                v1.4.8        https://github.com/vorner/signal-hook
+  • smallvec                            v1.15.1       https://github.com/servo/rust-smallvec
+  • socket2                             v0.5.10       https://github.com/rust-lang/socket2
+  • socket2                             v0.6.2        https://github.com/rust-lang/socket2
+  • stable_deref_trait                  v1.2.1        https://github.com/storyyeller/stable_deref_trait
+  • static_assertions                   v1.1.0        https://github.com/nvzqz/static-assertions-rs
+  • syn                                 v1.0.109      https://github.com/dtolnay/syn
+  • syn                                 v2.0.114      https://github.com/dtolnay/syn
+  • system-configuration                v0.6.1        https://github.com/mullvad/system-configuration-rs
+  • system-configuration-sys            v0.6.0        https://github.com/mullvad/system-configuration-rs
+  • system-deps                         v6.2.2        https://github.com/gdesmott/system-deps
+  • tempfile                            v3.24.0       https://github.com/Stebalien/tempfile
+  • thiserror                           v1.0.69       https://github.com/dtolnay/thiserror
+  • thiserror                           v2.0.18       https://github.com/dtolnay/thiserror
+  • thiserror-impl                      v1.0.69       https://github.com/dtolnay/thiserror
+  • thiserror-impl                      v2.0.18       https://github.com/dtolnay/thiserror
+  • thread_local                        v1.1.9        https://github.com/Amanieu/thread_local-rs
+  • time                                v0.3.46       https://github.com/time-rs/time
+  • time-core                           v0.1.8        https://github.com/time-rs/time
+  • tokio-rustls                        v0.26.4       https://github.com/rustls/tokio-rustls
+  • toml                                v0.8.23       https://github.com/toml-rs/toml
+  • toml_datetime                       v0.6.11       https://github.com/toml-rs/toml
+  • toml_edit                           v0.22.27      https://github.com/toml-rs/toml
+  • tungstenite                         v0.28.0       https://github.com/snapview/tungstenite-rs
+  • typed-path                          v0.12.1       https://github.com/chipsenkbeil/typed-path
+  • typenum                             v1.19.0       https://github.com/paholg/typenum
+  • ucd-trie                            v0.1.7        https://github.com/BurntSushi/ucd-generate
+  • unarray                             v0.1.4        https://github.com/cameron1024/unarray
+  • unicase                             v2.9.0        https://github.com/seanmonstar/unicase
+  • unicode-segmentation                v1.12.0       https://github.com/unicode-rs/unicode-segmentation
+  • unicode-truncate                    v2.0.1        https://github.com/Aetf/unicode-truncate
+  • unicode-width                       v0.2.2        https://github.com/unicode-rs/unicode-width
+  • url                                 v2.5.8        https://github.com/servo/rust-url
+  • utf-8                               v0.7.6        https://github.com/SimonSapin/rust-utf8
+  • wasm-bindgen                        v0.2.108      https://github.com/wasm-bindgen/wasm-bindgen
+  • wasm-bindgen-futures                v0.4.58       https://github.com/wasm-bindgen/wasm-bindgen/tree/master/cra...
+  • wasm-bindgen-macro                  v0.2.108      https://github.com/wasm-bindgen/wasm-bindgen/tree/master/cra...
+  • wasm-bindgen-macro-support          v0.2.108      https://github.com/wasm-bindgen/wasm-bindgen/tree/master/cra...
+  • wasm-bindgen-shared                 v0.2.108      https://github.com/wasm-bindgen/wasm-bindgen/tree/master/cra...
+  • web-sys                             v0.3.85       https://github.com/wasm-bindgen/wasm-bindgen/tree/master/cra...
+  • web-time                            v1.1.0        https://github.com/daxpedda/web-time
+  • weezl                               v0.1.12       https://github.com/image-rs/weezl
+  • windows-core                        v0.62.2       https://github.com/microsoft/windows-rs
+  • windows-implement                   v0.60.2       https://github.com/microsoft/windows-rs
+  • windows-interface                   v0.59.3       https://github.com/microsoft/windows-rs
+  • windows-link                        v0.2.1        https://github.com/microsoft/windows-rs
+  • windows-registry                    v0.6.1        https://github.com/microsoft/windows-rs
+  • windows-result                      v0.4.1        https://github.com/microsoft/windows-rs
+  • windows-strings                     v0.5.1        https://github.com/microsoft/windows-rs
+  • windows-sys                         v0.45.0       https://github.com/microsoft/windows-rs
+  • windows-sys                         v0.52.0       https://github.com/microsoft/windows-rs
+  • windows-sys                         v0.60.2       https://github.com/microsoft/windows-rs
+  • windows-sys                         v0.61.2       https://github.com/microsoft/windows-rs
+  • windows-targets                     v0.42.2       https://github.com/microsoft/windows-rs
+  • windows-targets                     v0.52.6       https://github.com/microsoft/windows-rs
+  • windows-targets                     v0.53.5       https://github.com/microsoft/windows-rs
+  • windows_aarch64_gnullvm             v0.42.2       https://github.com/microsoft/windows-rs
+  • windows_aarch64_gnullvm             v0.52.6       https://github.com/microsoft/windows-rs
+  • windows_aarch64_gnullvm             v0.53.1       https://github.com/microsoft/windows-rs
+  • windows_aarch64_msvc                v0.42.2       https://github.com/microsoft/windows-rs
+  • windows_aarch64_msvc                v0.52.6       https://github.com/microsoft/windows-rs
+  • windows_aarch64_msvc                v0.53.1       https://github.com/microsoft/windows-rs
+  • windows_i686_gnu                    v0.42.2       https://github.com/microsoft/windows-rs
+  • windows_i686_gnu                    v0.52.6       https://github.com/microsoft/windows-rs
+  • windows_i686_gnu                    v0.53.1       https://github.com/microsoft/windows-rs
+  • windows_i686_gnullvm                v0.52.6       https://github.com/microsoft/windows-rs
+  • windows_i686_gnullvm                v0.53.1       https://github.com/microsoft/windows-rs
+  • windows_i686_msvc                   v0.42.2       https://github.com/microsoft/windows-rs
+  • windows_i686_msvc                   v0.52.6       https://github.com/microsoft/windows-rs
+  • windows_i686_msvc                   v0.53.1       https://github.com/microsoft/windows-rs
+  • windows_x86_64_gnu                  v0.42.2       https://github.com/microsoft/windows-rs
+  • windows_x86_64_gnu                  v0.52.6       https://github.com/microsoft/windows-rs
+  • windows_x86_64_gnu                  v0.53.1       https://github.com/microsoft/windows-rs
+  • windows_x86_64_gnullvm              v0.42.2       https://github.com/microsoft/windows-rs
+  • windows_x86_64_gnullvm              v0.52.6       https://github.com/microsoft/windows-rs
+  • windows_x86_64_gnullvm              v0.53.1       https://github.com/microsoft/windows-rs
+  • windows_x86_64_msvc                 v0.42.2       https://github.com/microsoft/windows-rs
+  • windows_x86_64_msvc                 v0.52.6       https://github.com/microsoft/windows-rs
+  • windows_x86_64_msvc                 v0.53.1       https://github.com/microsoft/windows-rs
+  • x11rb                               v0.13.2       https://github.com/psychon/x11rb
+  • x11rb-protocol                      v0.13.2       https://github.com/psychon/x11rb
+  • zeromq-src                          v0.2.6+4.3.4  https://github.com/jean-airoldie/zeromq-src-rs
+  • zstd-safe                           v7.2.4        https://github.com/gyscos/zstd-rs
+
+
+----------------------------------------------------------------------------------------------------
+LICENSE: MIT
+COUNT: 124 crates
+----------------------------------------------------------------------------------------------------
+
+  • axum                                v0.8.8        https://github.com/tokio-rs/axum
+  • axum-core                           v0.5.6        https://github.com/tokio-rs/axum
+  • bitvec                              v1.0.1        https://github.com/bitvecto-rs/bitvec
+  • block2                              v0.6.2        https://github.com/madsmtm/objc2
+  • bytes                               v1.11.0       https://github.com/tokio-rs/bytes
+  • castaway                            v0.2.4        https://github.com/sagebind/castaway
+  • cfg_aliases                         v0.2.1        https://github.com/katharostech/cfg_aliases
+  • combine                             v4.6.7        https://github.com/Marwes/combine
+  • compact_str                         v0.9.0        https://github.com/ParkMyCar/compact_str
+  • convert_case                        v0.10.0       https://github.com/rutrum/convert-case
+  • crossterm                           v0.29.0       https://github.com/crossterm-rs/crossterm
+  • crossterm_winapi                    v0.9.1        https://github.com/crossterm-rs/crossterm-winapi
+  • crunchy                             v0.2.4        https://github.com/eira-fransham/crunchy
+  • darling                             v0.23.0       https://github.com/TedDriggs/darling
+  • darling_core                        v0.23.0       https://github.com/TedDriggs/darling
+  • darling_macro                       v0.23.0       https://github.com/TedDriggs/darling
+  • data-encoding                       v2.10.0       https://github.com/ia0/data-encoding
+  • deflate64                           v0.1.10       https://github.com/anatawa12/deflate64-rs
+  • deltae                              v0.3.2        https://gitlab.com/ryanobeirne/deltae.git
+  • derive_more                         v2.1.1        https://github.com/JelteF/derive_more
+  • derive_more-impl                    v2.1.1        https://github.com/JelteF/derive_more
+  • dircpy                              v0.3.19       https://github.com/woelper/dircpy/
+  • downcast                            v0.11.0       https://github.com/fkoep/downcast-rs
+  • fancy-regex                         v0.11.0       https://github.com/fancy-regex/fancy-regex
+  • fax                                 v0.2.6        https://github.com/pdf-rs/fax
+  • fax_derive                          v0.2.0        https://github.com/pdf-rs/fax
+  • filedescriptor                      v0.8.3        https://github.com/wezterm/wezterm
+  • fs_extra                            v1.3.0        https://github.com/webdesus/fs_extra
+  • funty                               v2.0.0        https://github.com/myrrlyn/funty
+  • generic-array                       v0.14.7       https://github.com/fizyk20/generic-array.git
+  • globwalk                            v0.9.1        https://github.com/gilnaa/globwalk
+  • h2                                  v0.4.13       https://github.com/hyperium/h2
+  • http-body                           v1.0.1        https://github.com/hyperium/http-body
+  • http-body-util                      v0.1.3        https://github.com/hyperium/http-body
+  • http-range-header                   v0.4.2        https://github.com/MarcusGrass/parse-range-headers
+  • hyper                               v1.8.1        https://github.com/hyperium/hyper
+  • hyper-util                          v0.1.19       https://github.com/hyperium/hyper-util
+  • instability                         v0.3.11       https://github.com/ratatui/instability
+  • jwalk                               v0.8.1        https://github.com/byron/jwalk
+  • lab                                 v0.11.0       https://github.com/TooManyBees/lab
+  • libflate                            v2.2.1        https://github.com/sile/libflate
+  • libflate_lz77                       v2.2.0        https://github.com/sile/libflate
+  • libm                                v0.2.16       https://github.com/rust-lang/compiler-builtins
+  • libredox                            v0.1.12       https://gitlab.redox-os.org/redox-os/libredox.git
+  • lru                                 v0.16.3       https://github.com/jeromefroe/lru-rs.git
+  • matchers                            v0.2.0        https://github.com/hawkw/matchers
+  • memoffset                           v0.9.1        https://github.com/Gilnaa/memoffset
+  • mime_guess                          v2.0.5        https://github.com/abonander/mime_guess
+  • mio                                 v1.1.1        https://github.com/tokio-rs/mio
+  • nix                                 v0.29.0       https://github.com/nix-rust/nix
+  • nix                                 v0.30.1       https://github.com/nix-rust/nix
+  • nom                                 v7.1.3        https://github.com/Geal/nom
+  • nu-ansi-term                        v0.50.3       https://github.com/nushell/nu-ansi-term
+  • objc2                               v0.6.3        https://github.com/madsmtm/objc2
+  • objc2-encode                        v4.1.0        https://github.com/madsmtm/objc2
+  • objc2-foundation                    v0.3.2        https://github.com/madsmtm/objc2
+  • openssl-sys                         v0.9.111      https://github.com/rust-openssl/rust-openssl
+  • ordered-float                       v4.6.0        https://github.com/reem/rust-ordered-float
+  • parse-zoneinfo                      v0.3.1        https://github.com/chronotope/chrono-tz
+  • phf                                 v0.11.3       https://github.com/rust-phf/rust-phf
+  • phf_codegen                         v0.11.3       https://github.com/rust-phf/rust-phf
+  • phf_generator                       v0.11.3       https://github.com/rust-phf/rust-phf
+  • phf_macros                          v0.11.3       https://github.com/rust-phf/rust-phf
+  • phf_shared                          v0.11.3       https://github.com/rust-phf/rust-phf
+  • radium                              v0.7.0        https://github.com/bitvecto-rs/radium
+  • ratatui                             v0.30.0       https://github.com/ratatui/ratatui
+  • ratatui-core                        v0.1.0        https://github.com/ratatui/ratatui
+  • ratatui-crossterm                   v0.1.0        https://github.com/ratatui/ratatui
+  • ratatui-macros                      v0.7.0        https://github.com/ratatui/ratatui
+  • ratatui-termwiz                     v0.1.0        https://github.com/ratatui/ratatui
+  • ratatui-widgets                     v0.3.0        https://github.com/ratatui/ratatui
+  • redox_syscall                       v0.5.18       https://gitlab.redox-os.org/redox-os/syscall
+  • redox_users                         v0.5.2        https://gitlab.redox-os.org/redox-os/users
+  • rust-embed                          v8.11.0       https://pyrossh.dev/repos/rust-embed
+  • rust-embed-impl                     v8.11.0       https://pyrossh.dev/repos/rust-embed
+  • rust-embed-utils                    v8.11.0       https://pyrossh.dev/repos/rust-embed
+  • schannel                            v0.1.28       https://github.com/steffengy/schannel-rs
+  • sharded-slab                        v0.1.7        https://github.com/hawkw/sharded-slab
+  • simd-adler32                        v0.3.8        https://github.com/mcountryman/simd-adler32
+  • slab                                v0.4.11       https://github.com/tokio-rs/slab
+  • socketcan                           v3.5.0        https://github.com/mbr/socketcan-rs
+  • strsim                              v0.11.1       https://github.com/rapidfuzz/strsim-rs
+  • strum                               v0.27.2       https://github.com/Peternator7/strum
+  • strum_macros                        v0.27.2       https://github.com/Peternator7/strum
+  • synstructure                        v0.13.2       https://github.com/mystor/synstructure
+  • tap                                 v1.0.1        https://github.com/myrrlyn/tap
+  • tera                                v1.20.1       https://github.com/Keats/tera
+  • termios                             v0.3.3        https://github.com/dcuddeback/termios-rs
+  • termtree                            v0.5.1        https://github.com/rust-cli/termtree
+  • termwiz                             v0.23.3       https://github.com/wezterm/wezterm
+  • tiff                                v0.10.3       https://github.com/image-rs/image-tiff
+  • tokio                               v1.49.0       https://github.com/tokio-rs/tokio
+  • tokio-macros                        v2.6.0        https://github.com/tokio-rs/tokio
+  • tokio-native-tls                    v0.3.1        https://github.com/tokio-rs/tls
+  • tokio-stream                        v0.1.18       https://github.com/tokio-rs/tokio
+  • tokio-test                          v0.4.5        https://github.com/tokio-rs/tokio
+  • tokio-tungstenite                   v0.28.0       https://github.com/snapview/tokio-tungstenite
+  • tokio-util                          v0.7.18       https://github.com/tokio-rs/tokio
+  • tower                               v0.5.3        https://github.com/tower-rs/tower
+  • tower-http                          v0.6.8        https://github.com/tower-rs/tower-http
+  • tower-layer                         v0.3.3        https://github.com/tower-rs/tower
+  • tower-service                       v0.3.3        https://github.com/tower-rs/tower
+  • tracing                             v0.1.44       https://github.com/tokio-rs/tracing
+  • tracing-attributes                  v0.1.31       https://github.com/tokio-rs/tracing
+  • tracing-core                        v0.1.36       https://github.com/tokio-rs/tracing
+  • tracing-log                         v0.2.0        https://github.com/tokio-rs/tracing
+  • tracing-subscriber                  v0.3.22       https://github.com/tokio-rs/tracing
+  • try-lock                            v0.2.5        https://github.com/seanmonstar/try-lock
+  • unsafe-libyaml                      v0.2.11       https://github.com/dtolnay/unsafe-libyaml
+  • urlencoding                         v2.1.3        https://github.com/kornelski/rust_urlencoding
+  • valuable                            v0.1.1        https://github.com/tokio-rs/valuable
+  • version-compare                     v0.2.1        https://gitlab.com/timvisee/version-compare
+  • vtparse                             v0.6.2        https://github.com/wez/wezterm
+  • want                                v0.3.1        https://github.com/seanmonstar/want
+  • wezterm-blob-leases                 v0.1.1        https://github.com/wezterm/wezterm
+  • wezterm-color-types                 v0.3.0        https://github.com/wez/wezterm
+  • wezterm-dynamic                     v0.2.1        https://github.com/wezterm/wezterm
+  • wezterm-dynamic-derive              v0.1.1        https://github.com/wezterm/wezterm
+  • wezterm-input-types                 v0.1.0        https://github.com/wez/wezterm
+  • winnow                              v0.7.14       https://github.com/winnow-rs/winnow
+  • wyz                                 v0.5.1        https://github.com/myrrlyn/wyz
+  • zip                                 v7.2.0        https://github.com/zip-rs/zip2.git
+  • zmij                                v1.0.17       https://github.com/dtolnay/zmij
+  • zstd                                v0.13.3       https://github.com/gyscos/zstd-rs
+
+
+----------------------------------------------------------------------------------------------------
+LICENSE: MIT/Apache-2.0
+COUNT: 31 crates
+----------------------------------------------------------------------------------------------------
+
+  • android_system_properties           v0.1.5        https://github.com/nical/android_system_properties
+  • bit-set                             v0.5.3        https://github.com/contain-rs/bit-set
+  • bit-vec                             v0.6.3        https://github.com/contain-rs/bit-vec
+  • bitflags                            v1.3.2        https://github.com/bitflags/bitflags
+  • ctrlc                               v3.5.1        https://github.com/Detegr/rust-ctrlc.git
+  • fixedbitset                         v0.4.2        https://github.com/petgraph/fixedbitset
+  • foreign-types                       v0.3.2        https://github.com/sfackler/foreign-types
+  • foreign-types-shared                v0.1.1        https://github.com/sfackler/foreign-types
+  • humansize                           v2.1.3        https://github.com/LeopoldArkham/humansize
+  • ident_case                          v1.0.1        https://github.com/TedDriggs/ident_case
+  • jni                                 v0.21.1       https://github.com/jni-rs/jni-rs
+  • jni-sys                             v0.3.0        https://github.com/sfackler/rust-jni-sys
+  • memmem                              v0.1.1        http://github.com/jneem/memmem
+  • minimal-lexical                     v0.2.1        https://github.com/Alexhuszagh/minimal-lexical
+  • openssl-macros                      v0.1.1        
+  • openssl-probe                       v0.1.6        https://github.com/alexcrichton/openssl-probe
+  • quick-error                         v1.2.3        http://github.com/tailhook/quick-error
+  • quick-error                         v2.0.1        http://github.com/tailhook/quick-error
+  • rusty-fork                          v0.3.1        https://github.com/altsysrq/rusty-fork
+  • serde_urlencoded                    v0.7.1        https://github.com/nox/serde_urlencoded
+  • siphasher                           v1.0.2        https://github.com/jedisct1/rust-siphash
+  • slug                                v0.1.6        https://github.com/Stebalien/slug-rs
+  • vcpkg                               v0.2.15       https://github.com/mcgoo/vcpkg-rs
+  • version_check                       v0.9.5        https://github.com/SergioBenitez/version_check
+  • wait-timeout                        v0.2.1        https://github.com/alexcrichton/wait-timeout
+  • winapi                              v0.3.9        https://github.com/retep998/winapi-rs
+  • winapi-i686-pc-windows-gnu          v0.4.0        https://github.com/retep998/winapi-rs
+  • winapi-x86_64-pc-windows-gnu        v0.4.0        https://github.com/retep998/winapi-rs
+  • zmq                                 v0.10.0       https://github.com/erickt/rust-zmq
+  • zmq-sys                             v0.12.0       https://github.com/erickt/rust-zmq
+  • zstd-sys                            v2.0.16+zstd.1.5.7 https://github.com/gyscos/zstd-rs
+
+
+----------------------------------------------------------------------------------------------------
+LICENSE: Unicode-3.0
+COUNT: 18 crates
+----------------------------------------------------------------------------------------------------
+
+  • icu_collections                     v2.1.1        https://github.com/unicode-org/icu4x
+  • icu_locale_core                     v2.1.1        https://github.com/unicode-org/icu4x
+  • icu_normalizer                      v2.1.1        https://github.com/unicode-org/icu4x
+  • icu_normalizer_data                 v2.1.1        https://github.com/unicode-org/icu4x
+  • icu_properties                      v2.1.2        https://github.com/unicode-org/icu4x
+  • icu_properties_data                 v2.1.2        https://github.com/unicode-org/icu4x
+  • icu_provider                        v2.1.1        https://github.com/unicode-org/icu4x
+  • litemap                             v0.8.1        https://github.com/unicode-org/icu4x
+  • potential_utf                       v0.1.4        https://github.com/unicode-org/icu4x
+  • tinystr                             v0.8.2        https://github.com/unicode-org/icu4x
+  • writeable                           v0.6.2        https://github.com/unicode-org/icu4x
+  • yoke                                v0.8.1        https://github.com/unicode-org/icu4x
+  • yoke-derive                         v0.8.1        https://github.com/unicode-org/icu4x
+  • zerofrom                            v0.1.6        https://github.com/unicode-org/icu4x
+  • zerofrom-derive                     v0.1.6        https://github.com/unicode-org/icu4x
+  • zerotrie                            v0.2.3        https://github.com/unicode-org/icu4x
+  • zerovec                             v0.11.5       https://github.com/unicode-org/icu4x
+  • zerovec-derive                      v0.11.2       https://github.com/unicode-org/icu4x
+
+
+----------------------------------------------------------------------------------------------------
+LICENSE: Apache-2.0 OR MIT
+COUNT: 17 crates
+----------------------------------------------------------------------------------------------------
+
+  • atomic-waker                        v1.1.2        https://github.com/smol-rs/atomic-waker
+  • autocfg                             v1.5.0        https://github.com/cuviper/autocfg
+  • bit-set                             v0.8.0        https://github.com/contain-rs/bit-set
+  • bit-vec                             v0.8.0        https://github.com/contain-rs/bit-vec
+  • core2                               v0.4.0        https://github.com/bbqsrc/core2
+  • equivalent                          v1.0.2        https://github.com/indexmap-rs/equivalent
+  • fastrand                            v2.3.0        https://github.com/smol-rs/fastrand
+  • idna_adapter                        v1.2.1        https://github.com/hsivonen/idna_adapter
+  • indexmap                            v2.13.0       https://github.com/indexmap-rs/indexmap
+  • pin-project-lite                    v0.2.16       https://github.com/taiki-e/pin-project-lite
+  • portable-atomic                     v1.13.0       https://github.com/taiki-e/portable-atomic
+  • rustc-hash                          v2.1.1        https://github.com/rust-lang/rustc-hash
+  • utf8_iter                           v1.0.4        https://github.com/hsivonen/utf8_iter
+  • utf8parse                           v0.2.2        https://github.com/alacritty/vte
+  • uuid                                v1.20.0       https://github.com/uuid-rs/uuid
+  • zeroize                             v1.8.2        https://github.com/RustCrypto/utils
+  • zeroize_derive                      v1.4.3        https://github.com/RustCrypto/utils/tree/master/zeroize/deri...
+
+
+----------------------------------------------------------------------------------------------------
+LICENSE: Apache-2.0
+COUNT: 10 crates
+----------------------------------------------------------------------------------------------------
+
+  • fragile                             v2.0.1        https://github.com/mitsuhiko/fragile
+  • gethostname                         v1.1.0        https://codeberg.org/swsnr/gethostname.rs.git
+  • include-flate                       v0.3.1        https://github.com/SOF3/include-flate.git
+  • include-flate-codegen               v0.3.1        https://github.com/SOF3/include-flate.git
+  • include-flate-compress              v0.3.1        https://github.com/SOF3/include-flate.git
+  • lzma-rust2                          v0.15.7       https://github.com/hasenbanck/lzma-rust2/
+  • openssl                             v0.10.75      https://github.com/rust-openssl/rust-openssl
+  • playwright-rs                       v0.8.3        https://github.com/padamson/playwright-rust
+  • sync_wrapper                        v1.0.2        https://github.com/Actyx/sync_wrapper
+  • zopfli                              v0.8.3        https://github.com/zopfli-rs/zopfli
+
+
+----------------------------------------------------------------------------------------------------
+LICENSE: Unlicense OR MIT
+COUNT: 7 crates
+----------------------------------------------------------------------------------------------------
+
+  • aho-corasick                        v1.1.4        https://github.com/BurntSushi/aho-corasick
+  • byteorder                           v1.5.0        https://github.com/BurntSushi/byteorder
+  • byteorder-lite                      v0.1.0        https://github.com/image-rs/byteorder-lite
+  • globset                             v0.4.18       https://github.com/BurntSushi/ripgrep/tree/master/crates/glo...
+  • ignore                              v0.4.25       https://github.com/BurntSushi/ripgrep/tree/master/crates/ign...
+  • memchr                              v2.7.6        https://github.com/BurntSushi/memchr
+  • winapi-util                         v0.1.11       https://github.com/BurntSushi/winapi-util
+
+
+----------------------------------------------------------------------------------------------------
+LICENSE: Zlib OR Apache-2.0 OR MIT
+COUNT: 7 crates
+----------------------------------------------------------------------------------------------------
+
+  • bytemuck                            v1.24.0       https://github.com/Lokathor/bytemuck
+  • dispatch2                           v0.3.0        https://github.com/madsmtm/objc2
+  • objc2-app-kit                       v0.3.2        https://github.com/madsmtm/objc2
+  • objc2-core-foundation               v0.3.2        https://github.com/madsmtm/objc2
+  • objc2-core-graphics                 v0.3.2        https://github.com/madsmtm/objc2
+  • objc2-io-surface                    v0.3.2        https://github.com/madsmtm/objc2
+  • tinyvec                             v1.10.0       https://github.com/Lokathor/tinyvec
+
+
+----------------------------------------------------------------------------------------------------
+LICENSE: Apache-2.0 WITH LLVM-exception OR Apache-2.0 OR MIT
+COUNT: 5 crates
+----------------------------------------------------------------------------------------------------
+
+  • linux-raw-sys                       v0.11.0       https://github.com/sunfishcode/linux-raw-sys
+  • rustix                              v1.1.3        https://github.com/bytecodealliance/rustix
+  • wasi                                v0.11.1+wasi-snapshot-preview1 https://github.com/bytecodealliance/wasi
+  • wasip2                              v1.0.2+wasi-0.2.9 https://github.com/bytecodealliance/wasi-rs
+  • wit-bindgen                         v0.51.0       https://github.com/bytecodealliance/wit-bindgen
+
+
+----------------------------------------------------------------------------------------------------
+LICENSE: BSD-3-Clause
+COUNT: 4 crates
+----------------------------------------------------------------------------------------------------
+
+  • deunicode                           v1.6.2        https://github.com/kornelski/deunicode/
+  • neli                                v0.6.5        https://github.com/jbaublitz/neli
+  • neli-proc-macros                    v0.1.4        https://github.com/jbaublitz/neli
+  • subtle                              v2.6.1        https://github.com/dalek-cryptography/subtle
+
+
+----------------------------------------------------------------------------------------------------
+LICENSE: MIT OR Apache-2.0 OR Zlib
+COUNT: 4 crates
+----------------------------------------------------------------------------------------------------
+
+  • lru-slab                            v0.1.2        https://github.com/Ralith/lru-slab
+  • tinyvec_macros                      v0.1.1        https://github.com/Soveu/tinyvec_macros
+  • zune-core                           v0.4.12       
+  • zune-jpeg                           v0.4.21       https://github.com/etemesi254/zune-image/tree/dev/crates/zun...
+
+
+----------------------------------------------------------------------------------------------------
+LICENSE: Unlicense/MIT
+COUNT: 4 crates
+----------------------------------------------------------------------------------------------------
+
+  • csv                                 v1.4.0        https://github.com/BurntSushi/rust-csv
+  • csv-core                            v0.1.13       https://github.com/BurntSushi/rust-csv
+  • same-file                           v1.0.6        https://github.com/BurntSushi/same-file
+  • walkdir                             v2.5.0        https://github.com/BurntSushi/walkdir
+
+
+----------------------------------------------------------------------------------------------------
+LICENSE: Apache-2.0 OR ISC OR MIT
+COUNT: 3 crates
+----------------------------------------------------------------------------------------------------
+
+  • hyper-rustls                        v0.27.7       https://github.com/rustls/hyper-rustls
+  • rustls                              v0.23.36      https://github.com/rustls/rustls
+  • rustls-native-certs                 v0.8.3        https://github.com/rustls/rustls-native-certs
+
+
+----------------------------------------------------------------------------------------------------
+LICENSE: Apache-2.0/MIT
+COUNT: 3 crates
+----------------------------------------------------------------------------------------------------
+
+  • atomic                              v0.6.1        https://github.com/Amanieu/atomic-rs
+  • cesu8                               v1.1.0        https://github.com/emk/cesu8-rs
+  • signal-hook                         v0.3.18       https://github.com/vorner/signal-hook
+
+
+----------------------------------------------------------------------------------------------------
+LICENSE: Zlib
+COUNT: 3 crates
+----------------------------------------------------------------------------------------------------
+
+  • adler32                             v1.2.0        https://github.com/remram44/adler32-rs
+  • foldhash                            v0.2.0        https://github.com/orlp/foldhash
+  • zlib-rs                             v0.5.5        https://github.com/trifectatechfoundation/zlib-rs
+
+
+----------------------------------------------------------------------------------------------------
+LICENSE: BSD-2-Clause OR Apache-2.0 OR MIT
+COUNT: 2 crates
+----------------------------------------------------------------------------------------------------
+
+  • zerocopy                            v0.8.34       https://github.com/google/zerocopy
+  • zerocopy-derive                     v0.8.34       https://github.com/google/zerocopy
+
+
+----------------------------------------------------------------------------------------------------
+LICENSE: BSD-3-Clause OR Apache-2.0
+COUNT: 2 crates
+----------------------------------------------------------------------------------------------------
+
+  • moxcms                              v0.7.11       https://github.com/awxkee/moxcms.git
+  • pxfm                                v0.1.27       https://github.com/awxkee/pxfm
+
+
+----------------------------------------------------------------------------------------------------
+LICENSE: BSL-1.0
+COUNT: 2 crates
+----------------------------------------------------------------------------------------------------
+
+  • clipboard-win                       v5.4.1        https://github.com/DoumanAsh/clipboard-win
+  • error-code                          v3.3.2        https://github.com/DoumanAsh/error-code
+
+
+----------------------------------------------------------------------------------------------------
+LICENSE: CC0-1.0 OR MIT-0 OR Apache-2.0
+COUNT: 2 crates
+----------------------------------------------------------------------------------------------------
+
+  • constant_time_eq                    v0.3.1        https://github.com/cesarb/constant_time_eq
+  • dunce                               v1.0.5        https://gitlab.com/kornelski/dunce
+
+
+----------------------------------------------------------------------------------------------------
+LICENSE: ISC
+COUNT: 2 crates
+----------------------------------------------------------------------------------------------------
+
+  • rustls-webpki                       v0.103.9      https://github.com/rustls/webpki
+  • untrusted                           v0.9.0        https://github.com/briansmith/untrusted
+
+
+----------------------------------------------------------------------------------------------------
+LICENSE: MPL-2.0
+COUNT: 2 crates
+----------------------------------------------------------------------------------------------------
+
+  • colored                             v3.1.1        https://github.com/mackwic/colored
+  • option-ext                          v0.2.0        https://github.com/soc/option-ext.git
+
+
+----------------------------------------------------------------------------------------------------
+LICENSE: (Apache-2.0 OR MIT) AND BSD-3-Clause
+COUNT: 1 crates
+----------------------------------------------------------------------------------------------------
+
+  • encoding_rs                         v0.8.35       https://github.com/hsivonen/encoding_rs
+
+
+----------------------------------------------------------------------------------------------------
+LICENSE: (MIT OR Apache-2.0) AND Unicode-3.0
+COUNT: 1 crates
+----------------------------------------------------------------------------------------------------
+
+  • unicode-ident                       v1.0.22       https://github.com/dtolnay/unicode-ident
+
+
+----------------------------------------------------------------------------------------------------
+LICENSE: (MIT OR Apache-2.0) AND Unicode-DFS-2016
+COUNT: 1 crates
+----------------------------------------------------------------------------------------------------
+
+  • finl_unicode                        v1.4.0        https://github.com/dahosek/finl_unicode
+
+
+----------------------------------------------------------------------------------------------------
+LICENSE: 0BSD OR MIT OR Apache-2.0
+COUNT: 1 crates
+----------------------------------------------------------------------------------------------------
+
+  • adler2                              v2.0.1        https://github.com/oyvindln/adler2
+
+
+----------------------------------------------------------------------------------------------------
+LICENSE: Apache-2.0 / MIT
+COUNT: 1 crates
+----------------------------------------------------------------------------------------------------
+
+  • fnv                                 v1.0.7        https://github.com/servo/rust-fnv
+
+
+----------------------------------------------------------------------------------------------------
+LICENSE: Apache-2.0 AND ISC
+COUNT: 1 crates
+----------------------------------------------------------------------------------------------------
+
+  • ring                                v0.17.14      https://github.com/briansmith/ring
+
+
+----------------------------------------------------------------------------------------------------
+LICENSE: Apache-2.0 OR BSL-1.0
+COUNT: 1 crates
+----------------------------------------------------------------------------------------------------
+
+  • ryu                                 v1.0.22       https://github.com/dtolnay/ryu
+
+
+----------------------------------------------------------------------------------------------------
+LICENSE: Apache-2.0 WITH LLVM-exception
+COUNT: 1 crates
+----------------------------------------------------------------------------------------------------
+
+  • target-lexicon                      v0.12.16      https://github.com/bytecodealliance/target-lexicon
+
+
+----------------------------------------------------------------------------------------------------
+LICENSE: CC0-1.0 OR MIT-0
+COUNT: 1 crates
+----------------------------------------------------------------------------------------------------
+
+  • ppmd-rust                           v1.4.0        https://github.com/hasenbanck/ppmd-rust
+
+
+----------------------------------------------------------------------------------------------------
+LICENSE: CDLA-Permissive-2.0
+COUNT: 1 crates
+----------------------------------------------------------------------------------------------------
+
+  • webpki-root-certs                   v1.0.5        https://github.com/rustls/webpki-roots
+
+
+----------------------------------------------------------------------------------------------------
+LICENSE: ISC AND (Apache-2.0 OR ISC)
+COUNT: 1 crates
+----------------------------------------------------------------------------------------------------
+
+  • aws-lc-rs                           v1.15.4       https://github.com/aws/aws-lc-rs
+
+
+----------------------------------------------------------------------------------------------------
+LICENSE: ISC AND (Apache-2.0 OR ISC) AND OpenSSL
+COUNT: 1 crates
+----------------------------------------------------------------------------------------------------
+
+  • aws-lc-sys                          v0.37.0       https://github.com/aws/aws-lc-rs
+
+
+----------------------------------------------------------------------------------------------------
+LICENSE: MIT AND BSD-3-Clause
+COUNT: 1 crates
+----------------------------------------------------------------------------------------------------
+
+  • matchit                             v0.8.4        https://github.com/ibraheemdev/matchit
+
+
+----------------------------------------------------------------------------------------------------
+LICENSE: MIT AND Unicode-DFS-2016
+COUNT: 1 crates
+----------------------------------------------------------------------------------------------------
+
+  • wezterm-bidi                        v0.2.3        https://github.com/wez/wezterm
+
+
+----------------------------------------------------------------------------------------------------
+LICENSE: MIT OR Apache-2.0 OR LGPL-2.1-or-later
+COUNT: 1 crates
+----------------------------------------------------------------------------------------------------
+
+  • r-efi                               v5.3.0        https://github.com/r-efi/r-efi
+
+
+----------------------------------------------------------------------------------------------------
+LICENSE: MIT OR Zlib OR Apache-2.0
+COUNT: 1 crates
+----------------------------------------------------------------------------------------------------
+
+  • miniz_oxide                         v0.8.9        https://github.com/Frommi/miniz_oxide/tree/master/miniz_oxid...
+
+
+----------------------------------------------------------------------------------------------------
+LICENSE: WTFPL
+COUNT: 1 crates
+----------------------------------------------------------------------------------------------------
+
+  • terminfo                            v0.9.0        https://github.com/meh/rust-terminfo
+
+
+----------------------------------------------------------------------------------------------------
+LICENSE: bzip2-1.0.6
+COUNT: 1 crates
+----------------------------------------------------------------------------------------------------
+
+  • libbz2-rs-sys                       v0.2.2        https://github.com/trifectatechfoundation/libbzip2-rs
+
+====================================================================================================
+END OF LICENSE INVENTORY
+====================================================================================================
+
+This report was automatically generated from Cargo.toml metadata.
+For license text, see: https://spdx.org/licenses/
+

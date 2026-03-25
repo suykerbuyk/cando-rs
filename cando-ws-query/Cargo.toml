@@ -1,0 +1,21 @@
+[package]
+name = "cando-ws-query"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+repository.workspace = true
+description = "WebSocket query tool for CAN simulator state validation"
+
+[[bin]]
+name = "cando-ws-query"
+path = "src/main.rs"
+
+[dependencies]
+tokio = { workspace = true, features = ["rt-multi-thread", "macros", "time"] }
+tokio-tungstenite.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+clap.workspace = true
+anyhow.workspace = true
+futures-util.workspace = true
