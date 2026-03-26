@@ -531,25 +531,60 @@ build-all-targets: build-all-x86_64 build-all-aarch64 build-all-musl
 	@echo "  file target/aarch64-unknown-linux-gnu/release/cando-util"
 	@echo "  file target/aarch64-unknown-linux-musl/release/cando-util"
 
+# DBC repository management (for maintainers with DBC access)
+CANDO_DBC_REPO ?= git@github.com:suykerbuyk/cando-dbc-private.git
+CANDO_DBC_PATH ?= dbc
+
+dbc-init:
+	@if [ -d "$(CANDO_DBC_PATH)/.git" ]; then \
+		echo "DBC repo already initialized at $(CANDO_DBC_PATH)"; \
+		echo "   Use 'make dbc-pull' to update"; \
+	else \
+		echo "Cloning DBC repository into $(CANDO_DBC_PATH)..."; \
+		git clone $(CANDO_DBC_REPO) $(CANDO_DBC_PATH); \
+		echo "DBC repository initialized"; \
+	fi
+
+dbc-pull:
+	@if [ -d "$(CANDO_DBC_PATH)/.git" ]; then \
+		echo "Updating DBC repository..."; \
+		git -C $(CANDO_DBC_PATH) pull --ff-only; \
+	else \
+		echo "Error: DBC repo not found at $(CANDO_DBC_PATH)"; \
+		echo "   Run 'make dbc-init' first"; \
+		exit 1; \
+	fi
+
+dbc-status:
+	@if [ -d "$(CANDO_DBC_PATH)/.git" ]; then \
+		echo "DBC repo: $(CANDO_DBC_PATH)"; \
+		echo "Remote: $$(git -C $(CANDO_DBC_PATH) remote get-url origin 2>/dev/null || echo 'unknown')"; \
+		echo "Branch: $$(git -C $(CANDO_DBC_PATH) rev-parse --abbrev-ref HEAD)"; \
+		echo "Commit: $$(git -C $(CANDO_DBC_PATH) log -1 --format='%h %s')"; \
+	else \
+		echo "DBC repo not initialized at $(CANDO_DBC_PATH)"; \
+		echo "   Run 'make dbc-init' to clone"; \
+	fi
+
 # Code generation targets (for maintainers with DBC files)
 codegen-status:
 	@echo "Checking code generation status"
-	cargo run --bin cando-codegen -- status
+	CANDO_DBC_PATH=$(CANDO_DBC_PATH) cargo run --bin cando-codegen -- status
 
 codegen-all:
 	@echo "Regenerating all changed protocols"
-	cargo run --bin cando-codegen -- generate-all
+	CANDO_DBC_PATH=$(CANDO_DBC_PATH) cargo run --bin cando-codegen -- generate-all
 
 codegen-force:
 	@echo "Force regenerating all protocols"
-	cargo run --bin cando-codegen -- generate-all --force
+	CANDO_DBC_PATH=$(CANDO_DBC_PATH) cargo run --bin cando-codegen -- generate-all --force
 	@echo ""
 	@echo "Checking for codegen algorithm changes..."
 	@./scripts/dev-tools/detect_codegen_change.sh || true
 
 codegen-validate:
 	@echo "Validating generated code checksums"
-	cargo run --bin cando-codegen -- validate
+	CANDO_DBC_PATH=$(CANDO_DBC_PATH) cargo run --bin cando-codegen -- validate
 
 codegen-detect-changes:
 	@echo "Detecting codegen algorithm changes"
@@ -568,7 +603,7 @@ codegen-proto:
 		echo "Available protocols: j1939, j1939-73"; \
 		exit 1; \
 	fi
-	cargo run --bin cando-codegen -- generate --protocol $(PROTO)
+	CANDO_DBC_PATH=$(CANDO_DBC_PATH) cargo run --bin cando-codegen -- generate --protocol $(PROTO)
 
 codegen-proto-force:
 	@echo "Force regenerating protocol: $(PROTO)"
@@ -577,11 +612,11 @@ codegen-proto-force:
 		echo "Usage: make codegen-proto-force PROTO=<protocol-name>"; \
 		exit 1; \
 	fi
-	cargo run --bin cando-codegen -- generate --protocol $(PROTO) --force
+	CANDO_DBC_PATH=$(CANDO_DBC_PATH) cargo run --bin cando-codegen -- generate --protocol $(PROTO) --force
 
 codegen-list:
 	@echo "Available protocols for code generation:"
-	cargo run --bin cando-codegen -- list
+	CANDO_DBC_PATH=$(CANDO_DBC_PATH) cargo run --bin cando-codegen -- list
 
 # Metadata validation targets
 validate-dump-messages: build-release

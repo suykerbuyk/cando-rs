@@ -39,7 +39,7 @@ use serde::{Deserialize, Serialize};
 use sha2::{Digest, Sha256};
 use std::collections::BTreeMap;
 use std::fs;
-use std::path::Path;
+use std::path::{Path, PathBuf};
 use std::time::SystemTime;
 
 /// Maximum number of history entries to keep in .checksums.json
@@ -72,7 +72,9 @@ const MAX_HISTORY_ENTRIES: usize = 20;
                   Use this tool when you have licensed DBC files and need to regenerate protocol implementations.\n\
                   Changes are tracked via checksums stored in dbc/.checksums.json\n\
                   \n\
-                  See dbc/README.md for complete documentation on the code generation workflow."
+                  Set CANDO_DBC_PATH to use DBC files from a different location (default: ./dbc).\n\
+                  \n\
+                  See doc/guide-codegen-quick-ref.md for complete documentation on the code generation workflow."
 )]
 struct Cli {
     #[command(subcommand)]
@@ -341,7 +343,7 @@ impl DbcChecksums {
                     dbc_sources.insert(
                         protocol.clone(),
                         DbcSourceInfo {
-                            path: config.dbc_file.to_string(),
+                            path: resolve_dbc_path(config.dbc_file).display().to_string(),
                             hash: hash.clone(),
                             modified: None,
                             size: None,
@@ -517,7 +519,8 @@ fn get_file_metadata(path: &str) -> (Option<String>, Option<u64>) {
     }
 }
 
-/// Protocol configuration mapping protocol names to their DBC files and output paths
+/// Protocol configuration mapping protocol names to their DBC files and output paths.
+/// `dbc_file` is relative to the DBC base directory (see [`dbc_base_dir`]).
 struct ProtocolConfig {
     name: &'static str,
     dbc_file: &'static str,
@@ -527,17 +530,34 @@ struct ProtocolConfig {
 const PROTOCOLS: &[ProtocolConfig] = &[
     ProtocolConfig {
         name: "j1939",
-        dbc_file: "dbc/j1939.dbc",
+        dbc_file: "j1939.dbc",
         output_file: "cando-messages/src/generated/j1939.rs",
     },
     ProtocolConfig {
         name: "j1939-73",
-        dbc_file: "dbc/j1939-73-DTCs-split.dbc",
+        dbc_file: "j1939-73-DTCs-split.dbc",
         output_file: "cando-messages/src/generated/j1939_73.rs",
     },
 ];
 
-const CHECKSUM_FILE: &str = "dbc/.checksums.json";
+/// Returns the DBC base directory, respecting the `CANDO_DBC_PATH` environment
+/// variable. Defaults to `"dbc"` (relative to the working directory).
+fn dbc_base_dir() -> PathBuf {
+    match std::env::var("CANDO_DBC_PATH") {
+        Ok(val) if !val.is_empty() => PathBuf::from(val),
+        _ => PathBuf::from("dbc"),
+    }
+}
+
+/// Resolves a DBC-relative filename (e.g. `"j1939.dbc"`) against the base dir.
+fn resolve_dbc_path(filename: &str) -> PathBuf {
+    dbc_base_dir().join(filename)
+}
+
+/// Returns the path to the checksums file inside the DBC directory.
+fn checksum_file() -> PathBuf {
+    dbc_base_dir().join(".checksums.json")
+}
 
 fn main() -> Result<()> {
     let raw_args: Vec<String> = std::env::args().collect();
@@ -594,11 +614,14 @@ fn generate_protocol(protocol: &str, force: bool) -> Result<()> {
     let config = find_protocol_config(protocol)
         .ok_or_else(|| anyhow::anyhow!("Unknown protocol: {}", protocol))?;
 
+    let dbc_path = resolve_dbc_path(config.dbc_file);
+    let cksum_path = checksum_file();
+
     println!("Processing protocol: {}", config.name);
 
     // Check if DBC file exists
-    if !Path::new(config.dbc_file).exists() {
-        eprintln!("DBC file not found: {}", config.dbc_file);
+    if !dbc_path.exists() {
+        eprintln!("DBC file not found: {}", dbc_path.display());
         eprintln!(
             "This is normal for open-source users without access to proprietary DBC files."
         );
@@ -607,15 +630,20 @@ fn generate_protocol(protocol: &str, force: bool) -> Result<()> {
             config.output_file
         );
         eprintln!("   No action needed - cargo build will work normally.");
+        if dbc_base_dir() != Path::new("dbc") {
+            eprintln!("   (CANDO_DBC_PATH={})", dbc_base_dir().display());
+        }
         return Ok(());
     }
 
+    let dbc_path_str = dbc_path.display().to_string();
+
     // Compute current DBC hash
-    let current_dbc_hash = compute_file_hash(config.dbc_file)
-        .with_context(|| format!("Failed to compute hash for {}", config.dbc_file))?;
+    let current_dbc_hash = compute_file_hash(&dbc_path_str)
+        .with_context(|| format!("Failed to compute hash for {}", dbc_path_str))?;
 
     // Load existing checksums
-    let checksums = load_checksums(CHECKSUM_FILE)?;
+    let checksums = load_checksums(&cksum_path.display().to_string())?;
 
     // Detect what type of change has occurred
     let change_type = detect_codegen_change(config, &checksums, &current_dbc_hash)?;
@@ -669,15 +697,15 @@ fn generate_protocol(protocol: &str, force: bool) -> Result<()> {
     }
 
     // Generate the code
-    println!("Generating {} from {}...", config.name, config.dbc_file);
+    println!("Generating {} from {}...", config.name, dbc_path_str);
 
     // This would call the actual generation logic
-    generate_rust_from_dbc(config.dbc_file, config.output_file)
+    generate_rust_from_dbc(&dbc_path_str, config.output_file)
         .with_context(|| format!("Failed to generate code for {}", config.name))?;
 
     // Update DBC checksum
     let mut updated_checksums = checksums;
-    updated_checksums.set_dbc_hash(config.name, current_dbc_hash.clone(), config.dbc_file);
+    updated_checksums.set_dbc_hash(config.name, current_dbc_hash.clone(), &dbc_path_str);
 
     // Calculate and store output hash
     if Path::new(config.output_file).exists() {
@@ -753,7 +781,7 @@ fn generate_protocol(protocol: &str, force: bool) -> Result<()> {
         },
     });
 
-    save_checksums(CHECKSUM_FILE, &updated_checksums)?;
+    save_checksums(&cksum_path.display().to_string(), &updated_checksums)?;
 
     println!(
         "Successfully generated {} (DBC hash: {}...)",
@@ -774,7 +802,7 @@ fn generate_all_protocols(force: bool) -> Result<()> {
     for config in PROTOCOLS {
         match generate_protocol(config.name, force) {
             Ok(_) => {
-                if Path::new(config.dbc_file).exists() {
+                if resolve_dbc_path(config.dbc_file).exists() {
                     success_count += 1;
                 } else {
                     skip_count += 1;
@@ -803,13 +831,14 @@ fn generate_all_protocols(force: bool) -> Result<()> {
 fn validate_all() -> Result<()> {
     println!("Validating generated code against DBC files...\n");
 
-    let checksums = load_checksums(CHECKSUM_FILE)?;
+    let checksums = load_checksums(&checksum_file().display().to_string())?;
     let mut valid_count = 0;
     let mut invalid_count = 0;
     let mut missing_count = 0;
 
     for config in PROTOCOLS {
-        if !Path::new(config.dbc_file).exists() {
+        let dbc_path = resolve_dbc_path(config.dbc_file);
+        if !dbc_path.exists() {
             println!(
                 "{}: DBC file not present (OK for open-source users)",
                 config.name
@@ -818,7 +847,7 @@ fn validate_all() -> Result<()> {
             continue;
         }
 
-        let current_hash = compute_file_hash(config.dbc_file)?;
+        let current_hash = compute_file_hash(&dbc_path.display().to_string())?;
 
         match checksums.get_dbc_hash(config.name) {
             Some(saved_hash) if saved_hash == current_hash => {
@@ -871,7 +900,12 @@ fn validate_all() -> Result<()> {
 fn show_status() -> Result<()> {
     println!("CAN-Do Code Generator Status\n");
 
-    let checksums = load_checksums(CHECKSUM_FILE)?;
+    let dbc_dir = dbc_base_dir();
+    if dbc_dir != Path::new("dbc") {
+        println!("DBC path: {}\n", dbc_dir.display());
+    }
+
+    let checksums = load_checksums(&checksum_file().display().to_string())?;
 
     println!("Protocol Status:");
     println!(
@@ -881,14 +915,15 @@ fn show_status() -> Result<()> {
     println!("{}", "-".repeat(80));
 
     for config in PROTOCOLS {
-        let dbc_exists = Path::new(config.dbc_file).exists();
+        let dbc_path = resolve_dbc_path(config.dbc_file);
+        let dbc_exists = dbc_path.exists();
         let output_exists = Path::new(config.output_file).exists();
         let has_checksum = checksums.get_dbc_hash(config.name).is_some();
 
         let status = if !dbc_exists && output_exists {
             "Ready (no DBC)"
         } else if dbc_exists && output_exists && has_checksum {
-            let current_hash = compute_file_hash(config.dbc_file)?;
+            let current_hash = compute_file_hash(&dbc_path.display().to_string())?;
             let saved_hash = checksums.get_dbc_hash(config.name).unwrap();
             if saved_hash == current_hash {
                 "Up to date"
@@ -921,7 +956,13 @@ fn show_status() -> Result<()> {
 fn list_protocols() {
     println!("Available Protocols:\n");
     for config in PROTOCOLS {
-        println!("  - {} ({})", config.name, config.dbc_file);
+        let dbc_path = resolve_dbc_path(config.dbc_file);
+        let marker = if dbc_path.exists() { "+" } else { "-" };
+        println!("  {} {} ({})", marker, config.name, dbc_path.display());
+    }
+    println!("\n  + = DBC present, - = DBC missing (OK for open-source users)");
+    if dbc_base_dir() != Path::new("dbc") {
+        println!("  CANDO_DBC_PATH={}", dbc_base_dir().display());
     }
     println!("\nUsage:");
     println!("  cargo run --bin cando-codegen -- generate --protocol <name>");
@@ -930,7 +971,7 @@ fn list_protocols() {
 fn detect_changes() -> Result<()> {
     println!("Detecting codegen algorithm changes...\n");
 
-    let checksums = load_checksums(CHECKSUM_FILE)?;
+    let checksums = load_checksums(&checksum_file().display().to_string())?;
     let mut evolution_count = 0;
     let mut clean_count = 0;
     let mut normal_count = 0;
@@ -938,11 +979,12 @@ fn detect_changes() -> Result<()> {
     let mut evolution_protocols = Vec::new();
 
     for config in PROTOCOLS {
-        if !Path::new(config.dbc_file).exists() {
+        let dbc_path = resolve_dbc_path(config.dbc_file);
+        if !dbc_path.exists() {
             continue;
         }
 
-        let current_dbc_hash = match compute_file_hash(config.dbc_file) {
+        let current_dbc_hash = match compute_file_hash(&dbc_path.display().to_string()) {
             Ok(hash) => hash,
             Err(_) => continue,
         };

@@ -1,36 +1,57 @@
 # Code Generator Quick Reference
 
-**Last Updated**: 2025-11-16  
+**Last Updated**: 2026-03-26
 **Purpose**: Complete reference for cando-codegen DBC → Rust code generation
 
 ---
 
-## 🚀 For Open Source Users (No DBC Files)
+## For Open Source Users (No DBC Files)
 
 You don't need DBC files! Generated code is already in the repository.
 
 ```bash
-git clone <repo>
+git clone https://github.com/suykerbuyk/cando-rs.git
 cd cando-rs
 cargo build --release
-cargo run --release -p rust-can-util -- encode MCM device_id=0x8A ...
 ```
 
 That's it! Skip to the [Troubleshooting](#troubleshooting) section if you have build issues.
 
 ---
 
-## 🛠️ For Maintainers (With DBC Files)
+## For Maintainers (With DBC Files)
 
-### First Time Setup
+### DBC Repository Setup
+
+DBC files live in a separate private repository and are gitignored from
+cando-rs. The `CANDO_DBC_PATH` environment variable controls where the
+codegen tool looks for DBC files (default: `./dbc`).
+
+**Option A — Clone into the default location:**
 
 ```bash
-# 1. Place your licensed DBC files in dbc/
-cp /path/to/your/EMP.dbc dbc/
-cp /path/to/your/j1939.dbc dbc/
-# ... etc
+make dbc-init                  # clones into ./dbc (gitignored)
+make codegen-status            # verify DBC files are detected
+```
 
-# 2. Generate initial checksums
+**Option B — Use DBC files from an external path:**
+
+```bash
+export CANDO_DBC_PATH=~/code/cando-dbc-private
+make codegen-status            # reads from $CANDO_DBC_PATH
+```
+
+**Keeping DBC files up to date:**
+
+```bash
+make dbc-pull                  # git pull --ff-only inside the DBC repo
+make dbc-status                # show DBC repo branch/commit
+```
+
+### First Time Code Generation
+
+```bash
+# After dbc-init or setting CANDO_DBC_PATH:
 cargo run -p cando-codegen -- generate-all
 ```
 
@@ -111,7 +132,7 @@ git commit -m "fix(codegen): improve generated code quality"
 cargo run -p cando-codegen -- list
 ```
 
-Output: `emp, hvpc, udc, j1939, j1939-73` (and emp_j1939 if DBC available)
+Output: `j1939, j1939-73`
 
 ### Check Status
 
@@ -289,17 +310,17 @@ pub struct UDC_Command {
 
 ---
 
-## 📂 File Locations
+## File Locations
 
 | Path | Description | In Git? |
 |------|-------------|---------|
-| `dbc/*.dbc` | Source DBC files | ❌ No (proprietary) |
-| `dbc/.checksums.json` | SHA-256 checksums (DBC + generator + output) | ✅ Yes |
-| `cando-messages/src/generated/*.rs` | Generated protocol code | ✅ Yes |
-| `cando-codegen/src/` | Generator source code | ✅ Yes |
-| `cando-codegen/src/generator.rs` | Main generation logic | ✅ Yes |
-| `cando-codegen/src/encoder.rs` | Bit packing/unpacking utilities | ✅ Yes |
-| `cando-codegen/src/field_name_converter.rs` | DBC name → snake_case | ✅ Yes |
+| `dbc/*.dbc` | Source DBC files (or `$CANDO_DBC_PATH/*.dbc`) | No (private repo) |
+| `dbc/.checksums.json` | SHA-256 checksums (DBC + generator + output) | Yes |
+| `cando-messages/src/generated/*.rs` | Generated protocol code | Yes |
+| `cando-codegen/src/` | Generator source code | Yes |
+| `cando-codegen/src/generator.rs` | Main generation logic | Yes |
+| `cando-codegen/src/encoder.rs` | Bit packing/unpacking utilities | Yes |
+| `cando-codegen/src/field_name_converter.rs` | DBC name → snake_case | Yes |
 
 ---
 
@@ -309,10 +330,12 @@ pub struct UDC_Command {
 
 **For users**: This is normal! You don't need DBC files. Generated code is already in the repo.
 
-**For maintainers**: Place your licensed DBC files in `dbc/` directory:
+**For maintainers**: Clone the private DBC repository or set the path:
 ```bash
-cp /path/to/EMP.dbc dbc/
-cargo run -p cando-codegen -- generate --protocol emp
+make dbc-init                  # clone into ./dbc
+# OR
+export CANDO_DBC_PATH=/path/to/your/dbc/files
+cargo run -p cando-codegen -- generate --protocol j1939
 ```
 
 ### "Generated code out of sync"
@@ -642,9 +665,8 @@ Warns if generated code is out of sync with DBC files.
 ## 🔗 Related Documentation
 
 - **Main README**: Project overview and getting started
-- **dbc/README.md**: Detailed DBC workflow and licensing
 - **cando-messages/README.md**: Generated code usage
-- **AI-WORKFLOW-GUIDE.md**: Development workflow and git practices
+- **doc/license-summary.md**: Licensing model (DBC proprietary, generated code MIT/Apache-2.0)
 
 ---
 
@@ -675,4 +697,4 @@ A: Test on small protocol (emp), review diff, then regenerate all, run full test
 
 **Questions?** Open an issue or check the main README.md
 
-**Last Updated**: 2025-11-16 (added generator source hash tracking)
+**Last Updated**: 2026-03-26 (CANDO_DBC_PATH env var, private DBC repo workflow)
