@@ -375,10 +375,10 @@ impl DbcChecksums {
     /// Get DBC hash for a protocol (works with both v1 and v2)
     fn get_dbc_hash(&self, protocol: &str) -> Option<String> {
         // Try v2 format first
-        if let Some(ref sources) = self.dbc_sources {
-            if let Some(info) = sources.get(protocol) {
-                return Some(info.hash.clone());
-            }
+        if let Some(ref sources) = self.dbc_sources
+            && let Some(info) = sources.get(protocol)
+        {
+            return Some(info.hash.clone());
         }
 
         // Fall back to v1 format
@@ -411,12 +411,11 @@ impl DbcChecksums {
 
     /// Get output hash for a specific file
     fn get_output_hash(&self, protocol: &str, file_path: &str) -> Option<String> {
-        if let Some(ref outputs) = self.generated_outputs {
-            if let Some(protocol_outputs) = outputs.get(protocol) {
-                if let Some(info) = protocol_outputs.get(file_path) {
-                    return Some(info.hash.clone());
-                }
-            }
+        if let Some(ref outputs) = self.generated_outputs
+            && let Some(protocol_outputs) = outputs.get(protocol)
+            && let Some(info) = protocol_outputs.get(file_path)
+        {
+            return Some(info.hash.clone());
         }
         None
     }

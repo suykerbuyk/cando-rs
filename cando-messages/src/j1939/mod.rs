@@ -109,45 +109,6 @@ pub fn is_valid_j1939_can_id(can_id: u32) -> bool {
     can_id <= 0x1FFFFFFF
 }
 
-/// Extracts device ID from J1939 CAN identifier.
-///
-/// Simple extraction of the source address (lower 8 bits). For PDU-aware
-/// extraction that handles both PDU1 destination and PDU2 source addresses,
-/// use [`crate::encoder::extract_device_id`] instead.
-///
-/// # Arguments
-/// * `can_id` - The 29-bit J1939 CAN identifier
-///
-/// # Returns
-/// Extracted device ID value (0-255)
-#[deprecated(
-    since = "0.1.0",
-    note = "Use crate::encoder::extract_device_id() for PDU-aware extraction, or crate::common::CAN_DEVICE_ID_MASK directly"
-)]
-pub fn extract_j1939_device_id(can_id: u32) -> u8 {
-    (can_id & crate::common::CAN_DEVICE_ID_MASK) as u8
-}
-
-/// Embeds device ID into J1939 CAN identifier.
-///
-/// Simple replacement of the lower 8 bits. For PDU-aware embedding that
-/// correctly handles PDU1 destination vs PDU2 source addressing, use
-/// [`crate::encoder::embed_device_id`] instead.
-///
-/// # Arguments
-/// * `base_can_id` - The base CAN ID (without device ID)
-/// * `device_id` - The device ID to embed (0-255)
-///
-/// # Returns
-/// Complete J1939 CAN ID with device ID embedded
-#[deprecated(
-    since = "0.1.0",
-    note = "Use crate::encoder::embed_device_id() for PDU-aware embedding, or crate::common::CAN_BASE_ID_MASK directly"
-)]
-pub fn embed_j1939_device_id(base_can_id: u32, device_id: u8) -> u32 {
-    (base_can_id & crate::common::CAN_BASE_ID_MASK) | (device_id as u32)
-}
-
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -158,29 +119,5 @@ mod tests {
         assert!(is_valid_j1939_can_id(0x1FFFFFFF));
         assert!(!is_valid_j1939_can_id(0x20000000));
         assert!(!is_valid_j1939_can_id(0xFFFFFFFF));
-    }
-
-    #[test]
-    fn test_device_id_extraction() {
-        assert_eq!(extract_j1939_device_id(0x18FEF18A), 0x8A);
-        assert_eq!(extract_j1939_device_id(0x0CFE4800), 0x00);
-        assert_eq!(extract_j1939_device_id(0x18EEFF01), 0x01);
-    }
-
-    #[test]
-    fn test_device_id_embedding() {
-        let base_id = 0x18FEF100;
-        assert_eq!(embed_j1939_device_id(base_id, 0x8A), 0x18FEF18A);
-        assert_eq!(embed_j1939_device_id(base_id, 0x00), 0x18FEF100);
-        assert_eq!(embed_j1939_device_id(base_id, 0xFF), 0x18FEF1FF);
-    }
-
-    #[test]
-    fn test_device_id_round_trip() {
-        let original_id = 0x18FEF18A;
-        let device = extract_j1939_device_id(original_id);
-        let base = original_id & 0xFFFFFF00;
-        let reconstructed = embed_j1939_device_id(base, device);
-        assert_eq!(original_id, reconstructed);
     }
 }

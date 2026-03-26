@@ -56,11 +56,9 @@ fn parse_message_ids_from_dbc(dbc_text: &str) -> std::collections::HashMap<Strin
         if line.starts_with("BO_ ") {
             // Parse: BO_ <id> <name>: <dlc> <node>
             let parts: Vec<&str> = line.split_whitespace().collect();
-            if parts.len() >= 3 {
-                if let Ok(msg_id) = parts[1].parse::<u32>() {
-                    let name = parts[2].trim_end_matches(':');
-                    message_ids.insert(name.to_string(), msg_id);
-                }
+            if parts.len() >= 3 && let Ok(msg_id) = parts[1].parse::<u32>() {
+                let name = parts[2].trim_end_matches(':');
+                message_ids.insert(name.to_string(), msg_id);
             }
         }
     }
@@ -895,6 +893,7 @@ fn generate_encode_decode_impl(
 /// Generate full encode/decode implementation for a multiplexed message
 ///
 /// Handles messages with multiplexor fields that switch between different payload variants
+#[allow(clippy::too_many_arguments)]
 fn generate_multiplexed_encode_decode_impl(
     msg_name: &proc_macro2::Ident,
     payload_enum_name: &proc_macro2::Ident,
